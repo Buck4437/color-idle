@@ -54,7 +54,7 @@ const colorUpgInfo = {
     scaling: 10000
   },
   33:{
-    text: "Placeholder",
+    text: "Unlock automation mode",
     cap: 1,
     cost: 100000
   }

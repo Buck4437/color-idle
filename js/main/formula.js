@@ -38,8 +38,8 @@ const formula = {
       if (tier === undefined) tier = 0
       let cost = colorUpgInfo["11"].baseCost * (colorUpgInfo["11"].scaling ** tier)
 
-      let time = 0.8**tier
-      return {cost, time}
+      let effect = 0.8**tier
+      return {cost, effect}
     },
     12(tier){
       if (tier === undefined) tier = 0
@@ -51,15 +51,15 @@ const formula = {
     13(){
       let cost = colorUpgInfo["13"].cost
 
-      let efficiency = 25
-      return {cost, efficiency}
+      let effect = 25
+      return {cost, effect}
     },
     21(tier){
       if (tier === undefined) tier = 0
       let cost = colorUpgInfo["21"].baseCost * (colorUpgInfo["21"].scaling ** tier)
 
-      let time = 0.8**tier
-      return {cost, time}
+      let effect = 0.8**tier
+      return {cost, effect}
     },
     22(tier){
       if (tier === undefined) tier = 0
@@ -71,15 +71,15 @@ const formula = {
     23(){
       let cost = colorUpgInfo["23"].cost
 
-      let efficiency = 25
-      return {cost, efficiency}
+      let effect = 25
+      return {cost, effect}
     },
     31(tier){
       if (tier === undefined) tier = 0
       let cost = colorUpgInfo["31"].baseCost * (colorUpgInfo["31"].scaling ** tier)
 
-      let time = 0.8**tier
-      return {cost, time}
+      let effect = 0.8**tier
+      return {cost, effect}
     },
     32(tier){
       if (tier === undefined) tier = 0
@@ -91,8 +91,8 @@ const formula = {
     33(){
       let cost = colorUpgInfo["33"].cost
 
-      let efficiency = 25
-      return {cost, efficiency}
+      let effect = 25
+      return {cost, effect}
     }
   }
 }
