@@ -7,13 +7,22 @@ var app = new Vue({
     player
   },
   methods:{
-    buyUpg(u){
+    canBuyUpg(u){
       let cTier = Number(u.charAt(0))-1
       let info = this.colorUpgInfo[u]
       let uTier = this.player.colorUpg[u]||0
-      if (uTier >= info.cap) return // max
+      if (uTier >= info.cap) return "max"
       let cost = this.formula.cUpg[u](uTier).cost
       if (this.player.color[cTier].amount >= cost){
+        return true
+      }
+      return false
+    },
+    buyUpg(u){
+      let cTier = Number(u.charAt(0))-1
+      let uTier = this.player.colorUpg[u]||0
+      let cost = this.formula.cUpg[u](uTier).cost
+      if (this.canBuyUpg(u) === true){
         this.player.color[cTier].amount -= cost
         this.player.colorUpg[u] = uTier + 1
       }
@@ -43,7 +52,14 @@ var app = new Vue({
         if (p.amount < c.cost) return
         this.player.color[i-1].amount -= c.cost
       }
-      this.player.color[i].timer = this.formula.gain.color[i]().speed
+      this.player.color[i].timer = 1
+    },
+    toggleAuto(i){
+      this.player.color[i].auto = !this.player.color[i].auto
+      if(this.player.color[i].auto){
+        //Manual to Auto
+        return
+      }
     },
     format(num, dp, sci, full){
       return format(num, dp, sci, full)
@@ -53,6 +69,15 @@ var app = new Vue({
     }
   },
   mounted(){
-    setInterval(this.gameLoop, 50)
+    setInterval(this.gameLoop, 25)
+  },
+  computed:{
+    colorUnlocked() {
+      let output = []
+      for (c of this.player.color){
+        if (c.isUnlocked) output.push(c)
+      }
+      return output
+    }
   }
 })

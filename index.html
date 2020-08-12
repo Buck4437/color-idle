@@ -5,7 +5,7 @@
     <link rel="stylesheet" type="text/css" href="css/styles.css">
     <link rel="stylesheet" type="text/css" href="css/about.css">
     <link rel="icon" href="icon.png">
-    <title>Color game</title>
+    <title>Color Game Remake</title>
   </head>
   <body>
     <div id="app">
@@ -21,28 +21,30 @@
         </div>
       </div>
       <div class="color-container">
-        <div class="color-producer" v-for="(c, index) in player.color">
+        <div class="color-producer" v-for="(c, index) in colorUnlocked">
           <div class="color-adder-container">
             <div class="color-adder-currency-container">
-              <div class="color-adder-currency">
+              <div class="color-adder-currency" :style="{color: color.hex[index]}">
                 {{color.noun[index]}}: {{format(c.amount)}}
               </div>
             </div>
             <div class="color-progress-container">
-              <div class="color-progress" :class="'color-progress'+index" :style="{width: (1-c.timer)*100 + '%'}"></div>
+              <div class="color-progress" :class="'color-progress'+index" :style="{width: (1-c.timer-Math.floor(1-c.timer))*100 + '%', backgroundColor: color.hex[index]}"></div>
             </div>
             <button class="color-adder-button" @click="generateColor(index)">
-              <div class="color-adder-text">
+              <div class="color-adder-text" :style="{color: color.hex[index]}">
                 + {{format(formula.gain.color[index]().amount, 1)}} {{color.noun[index]}}
+              </div>
+              <div v-if="index != 0" class="color-adder-text" :style="{color: color.hex[index-1]}">
+                - {{format(player.color[index].cost)}} {{color.noun[index-1]}}
               </div>
             </button>
           </div>
           <div class="color-upgrade-coll-button" :class="'color-upgrade-coll-button'+index" @click="collapse('color-upgrade-coll-button'+index, 'color-upgrade-coll-container'+index)">
-            Upgrades:
           </div>
           <div class="color-upgrade-coll-container" :class="'color-upgrade-coll-container'+index">
             <div class="color-upgrade-container">
-              <button class="color-upgrade-button color-upgrade-button-1" @click="buyUpg((index + 1) + '1')">
+              <button class="color-upgrade-button color-upgrade-button-1" @click="buyUpg((index + 1) + '1')" :class="{buttonGrey: canBuyUpg((index+1)+'1') == false, buttonGreen: canBuyUpg((index+1)+'1') == 'max', buttonDisabled: canBuyUpg((index+1)+'1') != true}">
                 <div class="color-upgrade-text">
                   {{colorUpgInfo[(index+1) + "1"].text}}
                 </div>
@@ -50,10 +52,10 @@
                   Cost: {{format(formula.cUpg[(index+1) + "1"](player.colorUpg[(index+1) + "1"]).cost)}} {{color.noun[index]}}
                 </div>
                 <div class="color-upgrade-text">
-                  Production Time: {{format(formula.cUpg[(index+1) + "1"](player.colorUpg[(index+1) + "1"]).effect, 2)}}s
+                  Production Time: {{format(1/formula.gain.color[index]().speed, 2)}}s
                 </div>
               </button>
-              <button class="color-upgrade-button color-upgrade-button-2" @click="buyUpg((index + 1) + '2')">
+              <button class="color-upgrade-button color-upgrade-button-2" @click="buyUpg((index + 1) + '2')" :class="{buttonGrey: canBuyUpg((index+1)+'2') == false, buttonGreen: canBuyUpg((index+1)+'2') == 'max', buttonDisabled: canBuyUpg((index+1)+'2') != true}">
                 <div class="color-upgrade-text">
                   {{colorUpgInfo[(index+1) + "2"].text}}
                 </div>
@@ -61,18 +63,23 @@
                   Cost: {{format(formula.cUpg[(index+1) + "2"](player.colorUpg[(index+1) + "2"]).cost)}} {{color.noun[index]}}
                 </div>
                 <div class="color-upgrade-text">
-                  Multiplier: x{{format(formula.cUpg[(index+1) + "2"](player.colorUpg[(index+1) + "2"]).effect, 2)}}
+                  Multiplier: x{{format(formula.gain.color[index]().amount, 2)}}
                 </div>
               </button>
-              <button class="color-upgrade-button color-upgrade-button-3" @click="buyUpg((index + 1) + '3')">
+              <button v-if="(player.colorUpg[(index+1) + '3']||0) < 1" class="color-upgrade-button color-upgrade-button-3" @click="buyUpg((index + 1) + '3')" :class="{buttonGrey: canBuyUpg((index+1)+'3') == false, buttonGreen: canBuyUpg((index+1)+'3') == 'max', buttonDisabled: canBuyUpg((index+1)+'3') != true}">
                 <div class="color-upgrade-text">
                   {{colorUpgInfo[(index+1) + "3"].text}}
                 </div>
                 <div v-if="(player.colorUpg[(index+1) + '3']||0) < colorUpgInfo[(index+1) + '3'].cap" class="color-upgrade-text">
                   Cost: {{format(formula.cUpg[(index+1) + "3"](player.colorUpg[(index+1) + "3"]).cost)}} {{color.noun[index]}}
                 </div>
+              </button>
+              <button v-if="(player.colorUpg[(index+1) + '3']||0) >= 1" class="color-auto" @click="toggleAuto(index)" :class="{buttonRed: !player.color[index].auto, buttonBlue: player.color[index].auto}">
+                <div class="color-auto-text">
+                  Mode: {{this.player.color[index].auto ? "Auto" : "Manual"}}
+                </div>
                 <div class="color-upgrade-text">
-                  Efficiency: placeholder
+                  Auto Efficiency: {{100*formula.cUpg[(index+1) + "3"]().effect}}%
                 </div>
               </button>
             </div>

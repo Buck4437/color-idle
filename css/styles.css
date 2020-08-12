@@ -9,12 +9,29 @@ button{
   cursor: pointer;
 }
 
-.button-disabled{
+.buttonGrey{
+  color: #aaa;
+}
+
+.buttonGreen{
+  color: #0f0;
+}
+
+.buttonRed{
+  color: #f00;
+}
+
+.buttonBlue{
+  color: #00f;
+}
+
+.buttonDisabled{
   cursor: default;
 }
 
 .currency-container {
   display: flex;
+  margin-bottom: 20px;
 }
 
 .red-currency, .green-currency, .blue-currency{
@@ -24,9 +41,21 @@ button{
   text-align: left;
 }
 
+.red-currency{
+  color: #f00
+}
+
+.green-currency{
+  color: #0f0
+}
+
+.blue-currency{
+  color: #00f
+}
+
 .color-producer {
   width: 1000px;
-  border: 1px solid black;
+  border: 2px solid black;
   margin-bottom: 20px;
 }
 
@@ -34,7 +63,7 @@ button{
   display: flex;
   justify-content: space-between;
   padding: 10px;
-  border: 1px solid black;
+  height: 60px;
 }
 
 .color-adder-currency-container{
@@ -47,27 +76,30 @@ button{
 
 .color-progress-container{
   width: 500px;
-  height: 50px;
   border: 1px solid black;
 }
 
 .color-progress{
   display: inline-block;
   height: 100%;
-  border: 1px solid black
 }
 
 .color-adder-button{
   padding: 10px;
-  width: 150px;
+  width: 200px;
   display: flex;
-  align-items: center;
+  flex-direction: column-reverse;
+  justify-content: space-around;
   border: 1px solid black;
 }
 
 .color-upgrade-coll-button{
   cursor: pointer;
   padding: 0 10px;
+  height: 30px;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  background-color: #eee
 }
 
 .color-upgrade-coll-button:after{
@@ -82,8 +114,8 @@ button{
 
 .color-upgrade-coll-container{
   padding: 0 10px;
-  border: 1px solid black;
   max-height: 0;
+  background-color: #eee;
   overflow: hidden;
   transition: max-height 0.2s ease-out;
 }
@@ -94,7 +126,7 @@ button{
   justify-content: space-between;
 }
 
-.color-upgrade-button{
+.color-upgrade-button, .color-auto{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
