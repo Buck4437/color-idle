@@ -6,7 +6,7 @@ function gameLoop(that){
     if (that.player.color[i].timer > 0){
       that.player.color[i].timer -= s * formula.gain.color[i]().speed
       if (that.player.color[i].timer <= 0){
-        that.player.color[i].amount += formula.gain.color[i]().amount
+        that.player.color[i].amount += that.player.color[i].gainOnReset
         that.player.color[i].timer = 0
       }
     }
@@ -14,7 +14,7 @@ function gameLoop(that){
       that.player.color[i].highest = that.player.color[i].amount
     }
     if(that.player.color[i].auto && (that.player.color[i].timer == 0)){
-      that.player.color[i].timer = 1
+      that.generateColor(i)
     }
   }
 

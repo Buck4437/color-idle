@@ -2,7 +2,14 @@ const color = {
   //used to display color
   normal: ["red", "green", "blue"],
   noun: ["Red", "Green", "Blue"],
-  hex: ["#f00", "#0f0", "#00f"]
+  hex: ["#f00", "#0f0", "#00f"],
+  palette:{
+    default: "#000",
+    red: "#f00",
+    green: "#0f0",
+    blue: "#00f",
+    lightGrey: "#aaa"
+  }
 }
 
 const colorUpgInfo = {
@@ -45,18 +52,18 @@ const colorUpgInfo = {
   31:{
     text: "Reduce production time by 20%",
     cap: 10,
-    baseCost: 10000,
-    scaling: 10000
+    baseCost: 1,
+    scaling: 2
   },
   32:{
     text: "You gain x1.5 more Blue",
     cap: 4,
-    baseCost: 10000,
-    scaling: 10000
+    baseCost: 5,
+    scaling: 3
   },
   33:{
     text: "Unlock automation mode",
     cap: 1,
-    cost: 100000
+    cost: 10
   }
 }

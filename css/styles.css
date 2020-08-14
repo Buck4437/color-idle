@@ -7,25 +7,10 @@ button{
   font-size: 15px;
   background-color: white;
   cursor: pointer;
+  user-select: none;
 }
 
-.buttonGrey{
-  color: #aaa;
-}
-
-.buttonGreen{
-  color: #0f0;
-}
-
-.buttonRed{
-  color: #f00;
-}
-
-.buttonBlue{
-  color: #00f;
-}
-
-.buttonDisabled{
+.button--disabled{
   cursor: default;
 }
 
@@ -63,7 +48,7 @@ button{
   display: flex;
   justify-content: space-between;
   padding: 10px;
-  height: 60px;
+  height: 80px;
 }
 
 .color-adder-currency-container{
@@ -79,21 +64,34 @@ button{
   border: 1px solid black;
 }
 
-.color-progress{
+.color-progress-red, .color-progress-green, .color-progress-blue{
   display: inline-block;
   height: 100%;
 }
 
+.color-progress-red{
+  background-color: #f00;
+}
+
+.color-progress-green{
+  background-color: #0f0;
+}
+
+.color-progress-blue{
+  background-color: #00f;
+}
+
 .color-adder-button{
-  padding: 10px;
+  padding: 5px;
+  font-size: 13px;
   width: 200px;
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   justify-content: space-around;
   border: 1px solid black;
 }
 
-.color-upgrade-coll-button{
+.color-upgrade-coll-button-red, .color-upgrade-coll-button-green, .color-upgrade-coll-button-blue{
   cursor: pointer;
   padding: 0 10px;
   height: 30px;
@@ -102,7 +100,7 @@ button{
   background-color: #eee
 }
 
-.color-upgrade-coll-button:after{
+.color-upgrade-coll-button-red:after, .color-upgrade-coll-button-green:after, .color-upgrade-coll-button-blue:after{
   float: right;
   content: "\25bc"; /* unicode char for down arrow */
 }
@@ -112,12 +110,23 @@ button{
   content: "\25b2"; /* unicode char for up arrow */
 }
 
-.color-upgrade-coll-container{
+.color-upgrade-coll-container-red, .color-upgrade-coll-container-green, .color-upgrade-coll-container-blue{
   padding: 0 10px;
   max-height: 0;
   background-color: #eee;
   overflow: hidden;
   transition: max-height 0.2s ease-out;
+}
+
+.color-effect-container{
+  display: flex;
+  align-items: center;
+  border: 1px solid black;
+  background-color: #eee;
+  height: 40px;
+  font-size: 15px;
+  margin: 10px;
+  padding: 10px;
 }
 
 .color-upgrade-container{

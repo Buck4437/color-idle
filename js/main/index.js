@@ -44,13 +44,23 @@ var app = new Vue({
         }
       }
     },
-    generateColor(i){
+    canGenerateColor(i){
       let c = this.player.color[i]
-      if (c.timer > 0) return
-      if (i != 0){
+      if (c.timer > 0) return "generating"
+      if (i >= 1){
         let p = this.player.color[i-1]
-        if (p.amount < c.cost) return
-        this.player.color[i-1].amount -= c.cost
+        if (p.amount < c.requirement) return false
+      }
+      return true
+    },
+    generateColor(i){
+      if (this.canGenerateColor(i) !== true) return
+      this.player.color[i].gainOnReset = formula.gain.color[i]().amount //used to store amount of color that will be generated
+      if (i >= 1){
+        for (let j = 0; j <= i-1; j++){
+          this.player.color[j].amount = 0
+          this.player.color[j].highest = 0
+        }
       }
       this.player.color[i].timer = 1
     },
@@ -70,14 +80,5 @@ var app = new Vue({
   },
   mounted(){
     setInterval(this.gameLoop, 25)
-  },
-  computed:{
-    colorUnlocked() {
-      let output = []
-      for (c of this.player.color){
-        if (c.isUnlocked) output.push(c)
-      }
-      return output
-    }
   }
 })
