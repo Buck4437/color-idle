@@ -32,7 +32,7 @@
               </div>
             </div>
             <div class="color-progress-container">
-              <div class="color-progress-red" :style="{width: (1-player.color[0].timer-Math.floor(1-player.color[0].timer))*100 + '%'}"></div>
+              <div class="color-progress-red" :style="{width: colorProgressWidth(0)}"></div>
             </div>
             <button class="color-adder-button"
                    :class="{'button--disabled': canGenerateColor(0) !== true}"
@@ -97,7 +97,7 @@
               </div>
             </div>
             <div class="color-progress-container">
-              <div class="color-progress-green" :style="{width: (1-player.color[1].timer-Math.floor(1-player.color[1].timer))*100 + '%'}"></div>
+              <div class="color-progress-green" :style="{width: colorProgressWidth(1)}"></div>
             </div>
             <button class="color-adder-button"
                    :class="{'button--disabled': canGenerateColor(1) !== true}"
@@ -108,9 +108,9 @@
               <div v-if="canGenerateColor(1) !== false">
                 Reset previous color
               </div>
-              <div v-if="canGenerateColor(1) !== false" class="color-adder-text-green"
-                                                       :class="{'color-adder-text--disabled': canGenerateColor(1) !== true}">
-                + {{format(formula.gain.color[1]().amount, 1)}} Green
+              <div v-if="canGenerateColor(1) !== false" class="color-adder-text-green">
+                <span v-if="canGenerateColor(1) === true">+ {{format(formula.gain.color[1]().amount, 1)}} Green</span>
+                <span v-if="canGenerateColor(1) === 'generating'">+ {{format(player.color[1].gainOnReset, 1)}} Green</span>
               </div>
             </button>
           </div>
@@ -174,7 +174,7 @@
               </div>
             </div>
             <div class="color-progress-container">
-              <div class="color-progress-blue" :style="{width: (1-player.color[2].timer-Math.floor(1-player.color[2].timer))*100 + '%'}"></div>
+              <div class="color-progress-blue" :style="{width: colorProgressWidth(2)}"></div>
             </div>
             <button class="color-adder-button"
                    :class="{'button--disabled': canGenerateColor(2) !== true}"
@@ -185,9 +185,9 @@
               <div v-if="canGenerateColor(2) !== false">
                 Reset all previous colors
               </div>
-              <div v-if="canGenerateColor(2) !== false" class="color-adder-text-blue"
-                                                       :class="{'color-adder-text--disabled': canGenerateColor(2) !== true}">
-                + {{format(formula.gain.color[2]().amount, 1)}} Blue
+              <div v-if="canGenerateColor(2) !== false" class="color-adder-text-blue">
+                <span v-if="canGenerateColor(2) === true">+ {{format(formula.gain.color[2]().amount, 1)}} Blue</span>
+                <span v-if="canGenerateColor(2) === 'generating'">+ {{format(player.color[2].gainOnReset, 1)}} Blue</span>
               </div>
             </button>
           </div>
@@ -251,5 +251,8 @@
   <script src="js/main/constant.js"></script>
   <script src="js/main/player.js"></script>
   <script src="js/main/game-loop.js"></script>
+
+  <script src="js/test/dev.js"></script>
+  
   <script src="js/main/index.js"></script>
 </html>

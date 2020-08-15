@@ -3,28 +3,29 @@ function gameLoop(that, s){
 
   //resolve this mess soon
   for (let i=0; i <= that.player.color.length-1; i++){
-    if (that.player.color[i].timer > 0){
-      that.player.color[i].timer -= s * formula.gain.color[i]().speed
-      if (that.player.color[i].timer <= 0){
-        that.player.color[i].amount += that.player.color[i].gainOnReset
-        that.player.color[i].timer = 0
+    if (that.player.color[i].timer.gt(0)){
+      that.player.color[i].timer = that.player.color[i].timer.minus(formula.gain.color[i]().speed.times(s))
+      if (that.player.color[i].timer.lte(0)){
+        that.player.color[i].amount = that.player.color[i].amount.plus(that.player.color[i].gainOnReset)
+        that.player.color[i].timer = new Decimal(0)
       }
     }
-    if (that.player.color[i].highest < that.player.color[i].amount){
+    if (that.player.color[i].highest.lt(that.player.color[i].amount)){
       that.player.color[i].highest = that.player.color[i].amount
     }
-    if(that.player.color[i].auto && (that.player.color[i].timer == 0)){
+    if(that.player.color[i].auto && (that.player.color[i].timer.equals(0))){
       that.generateColor(i)
     }
   }
 
+  //unlock stuff
   for (let i=2; i >= 1; i--){
     if(that.player.color[i-1] !== undefined){
-      if (that.player.color[i-1].amount >= 200){
+      if (that.player.color[i-1].amount.gte(200)){
         that.player.color[i].isUnlocked = true
       }
     }
-    if (that.player.color[i].amount > 0){
+    if (that.player.color[i].amount.gt(0)){
       that.player.color[i].isUnlocked = true
     }
     if(that.player.color[i+1] !== undefined){

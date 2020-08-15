@@ -2,57 +2,57 @@ const formula = {
   gain:{
     color: [
       function (){
-        let base = 1
+        let base = new Decimal(1)
 
-        let multi = 1
-        multi *= formula.colorEffect[1]()
-        multi *= formula.colorEffect[2]()
-        multi *= player.colorUpg.hasOwnProperty("12") ? formula.cUpg["12"](player.colorUpg["12"]).effect : 1
+        let multi = new Decimal(1)
+                  .times(formula.colorEffect[1]())
+                  .times(formula.colorEffect[2]())
+                  .times(player.colorUpg.hasOwnProperty("12") ? formula.cUpg["12"](player.colorUpg["12"]).effect : 1)
 
-        let amount = base * multi
+        let amount = base.times(multi)
 
-        let speed = 1 //increase = faster, decrease = slower
-        speed *= player.colorUpg.hasOwnProperty("11") ? formula.cUpg["11"](player.colorUpg["11"]).effect : 1
-        speed *= player.color[0].auto ? formula.cUpg["13"]().effect : 1
+        let speed = new Decimal(1) //increase = faster, decrease = slower
+                  .times(player.colorUpg.hasOwnProperty("11") ? formula.cUpg["11"](player.colorUpg["11"]).effect : 1)
+                  .times(player.color[0].auto ? formula.cUpg["13"]().effect : 1)
 
         return {base, multi, amount, speed}
       },
       function (red){
         if (red === undefined) red = player.color[0].amount
-        if (red == 0) red = 1 // because of Math.log10(red)
+        if (red.equals(0)) red = new Decimal(1) // because of Math.log10(red)
 
-        let base = 1
-        base = 10 ** (Math.log10(red)/3 - 1)
-        if (red < 1000) base = 0
+        let base = new Decimal(1)
+            base = Decimal.pow(10, Decimal.log10(red)/3-1)
+        if (red.lt(1000)) base = new Decimal(0)
 
-        let multi = 1
-        multi *= formula.colorEffect[2]()
-        multi *= player.colorUpg.hasOwnProperty("22") ? formula.cUpg["22"](player.colorUpg["22"]).effect : 1
+        let multi = new Decimal(1)
+                  .times(formula.colorEffect[2]())
+                  .times(player.colorUpg.hasOwnProperty("22") ? formula.cUpg["22"](player.colorUpg["22"]).effect : 1)
 
-        let amount = base * multi
+        let amount = base.times(multi)
 
-        let speed = 1
-        speed *= player.colorUpg.hasOwnProperty("21") ? formula.cUpg["21"](player.colorUpg["21"]).effect : 1
-        speed *= player.color[1].auto ? formula.cUpg["23"]().effect : 1
+        let speed = new Decimal(1)
+                  .times(player.colorUpg.hasOwnProperty("21") ? formula.cUpg["21"](player.colorUpg["21"]).effect : 1)
+                  .times(player.color[1].auto ? formula.cUpg["23"]().effect : 1)
 
         return {base, multi, amount, speed}
       },
       function (green){
         if (green === undefined) green = player.color[1].amount
-        if (green == 0) green = 1 // because of Math.log10(green)
+        if (green.equals(0)) green = new Decimal(1) // because of Math.log10(green)
 
-        let base = 1
-        base = 10 ** (Math.log10(green)/3 - 1)
-        if (green < 1000) base = 0
+        let base = new Decimal(1)
+            base = Decimal.pow(10, Decimal.log10(green)/3-1)
+        if (green.lt(1000)) base = new Decimal(0)
 
-        let multi = 1
-        multi *= player.colorUpg.hasOwnProperty("32") ? formula.cUpg["32"](player.colorUpg["32"]).effect : 1
+        let multi = new Decimal(1)
+                  .times(player.colorUpg.hasOwnProperty("32") ? formula.cUpg["32"](player.colorUpg["32"]).effect : 1)
 
-        let amount = base * multi
+        let amount = base.times(multi)
 
-        let speed = 1
-        speed *= player.colorUpg.hasOwnProperty("31") ? formula.cUpg["31"](player.colorUpg["31"]).effect : 1
-        speed *= player.color[2].auto ? formula.cUpg["33"]().effect : 1
+        let speed = new Decimal(1)
+                  .times(player.colorUpg.hasOwnProperty("31") ? formula.cUpg["31"](player.colorUpg["31"]).effect : 1)
+                  .times(player.color[2].auto ? formula.cUpg["33"]().effect : 1)
 
         return {base, multi, amount, speed}
       }
@@ -60,16 +60,16 @@ const formula = {
   },
   colorEffect:[
     function (){
-      return 1
+      return new Decimal(1)
     },
     function (){
-      let effect = 1
-      effect *= Math.log10(10*player.color[1].highest + 1)**4 + 1
+      let effect = new Decimal(1)
+                 .times(Decimal.pow(Decimal.log10(player.color[1].highest.times(10).plus(1)), 4).plus(1)) //log(10n+1)^4+1
       return effect
     },
     function (){
-      let effect = 1
-      effect *= Math.log10(10*player.color[2].highest + 1)**4 + 1
+      let effect = new Decimal(1)
+                 .times(Decimal.pow(Decimal.log10(player.color[2].highest.times(10).plus(1)), 4).plus(1)) //log(10n+1)^4+1
       return effect
     }
   ],
@@ -91,7 +91,7 @@ const formula = {
     13(){
       let cost = colorUpgInfo["13"].cost
 
-      let effect = 0.25
+      let effect = 0.50
       return {cost, effect}
     },
     21(tier){
@@ -111,7 +111,7 @@ const formula = {
     23(){
       let cost = colorUpgInfo["23"].cost
 
-      let effect = 0.25
+      let effect = 0.50
       return {cost, effect}
     },
     31(tier){
@@ -131,7 +131,7 @@ const formula = {
     33(){
       let cost = colorUpgInfo["33"].cost
 
-      let effect = 0.25
+      let effect = 0.50
       return {cost, effect}
     }
   }
