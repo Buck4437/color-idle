@@ -62,8 +62,14 @@ const colorUpgInfo = {
     scaling: 3
   },
   33:{
+    text: "Red automation efficiency +25%",
+    cap: 2,
+    baseCost: 10,
+    scaling: 5
+  },
+  34:{
     text: "Unlock automation mode",
     cap: 1,
     cost: 10
-  }
+  },
 }

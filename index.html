@@ -83,7 +83,7 @@
                   Mode: {{this.player.color[0].auto ? "Auto" : "Manual"}}
                 </div>
                 <div>
-                  Auto Efficiency: {{100*formula.cUpg["13"]().effect}}%
+                  Automation Efficiency: {{100*formula.cUpg["13"]().effect}}%
                 </div>
               </button>
             </div>
@@ -224,20 +224,31 @@
                   Multiplier: x{{format(formula.gain.color[2]().multi, 2)}}
                 </div>
               </button>
-              <button v-if="(player.colorUpg['33']||0) < 1" class="color-upgrade-button" @click="buyUpg('33')">
+              <button class="color-upgrade-button" @click="buyUpg('33')">
                 <div>
                   {{colorUpgInfo["33"].text}}
                 </div>
-                <div v-if="(player.colorUpg['33']||0) < 1">
+                <div v-if="(player.colorUpg['33']||0) < colorUpgInfo['33'].cap">
                   Cost: {{format(formula.cUpg["33"](player.colorUpg["33"]).cost)}} Blue
                 </div>
+                <div>
+                  Effect: +{{format(formula.cUpg["33"](player.colorUpg["33"]).effect*100)}}%
+                </div>
               </button>
-              <button v-if="(player.colorUpg['33']||0) >= 1" class="color-auto" @click="toggleAuto(2)">
+              <button v-if="(player.colorUpg['34']||0) < 1" class="color-upgrade-button" @click="buyUpg('34')">
+                <div>
+                  {{colorUpgInfo["34"].text}}
+                </div>
+                <div v-if="(player.colorUpg['34']||0) < 1">
+                  Cost: {{format(formula.cUpg["34"](player.colorUpg["34"]).cost)}} Blue
+                </div>
+              </button>
+              <button v-if="(player.colorUpg['34']||0) >= 1" class="color-auto" @click="toggleAuto(2)">
                 <div class="color-auto-text">
                   Mode: {{this.player.color[2].auto ? "Auto" : "Manual"}}
                 </div>
                 <div>
-                  Auto Efficiency: {{100*formula.cUpg["33"]().effect}}%
+                  Auto Efficiency: {{100*formula.cUpg["34"]().effect}}%
                 </div>
               </button>
             </div>
@@ -253,6 +264,6 @@
   <script src="js/main/game-loop.js"></script>
 
   <script src="js/test/dev.js"></script>
-  
+
   <script src="js/main/index.js"></script>
 </html>
