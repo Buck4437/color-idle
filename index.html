@@ -23,7 +23,21 @@
           Blue: {{format(player.color[2].amount)}}
         </div>
       </div>
-      <div class="color-container">
+      <div class="navigation-container">
+        <button class="navigation-button" @click="navigateTab('color-tab')">
+          Colors
+        </button>
+        <button class="navigation-button" @click="navigateTab('achievement-tab')">
+          Achievements
+        </button>
+        <button class="navigation-button" @click="navigateTab('stats-tab')">
+          Stats
+        </button>
+        <button class="navigation-button" @click="navigateTab('settings-tab')">
+          Settings
+        </button>
+      </div>
+      <div class="tab color-tab">
         <div class="color-producer">
           <div class="color-adder-container">
             <div class="color-adder-currency-container">
@@ -254,6 +268,15 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="tab achievement-tab" style="display: none">
+        Achievements Placeholder
+      </div>
+      <div class="tab stats-tab" style="display: none">
+        <span>Total play time: </span>
+      </div>
+      <div class="tab settings-tab" style="display: none">
+        Setting Placeholder
       </div>
     </div>
   </body>

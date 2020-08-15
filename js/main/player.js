@@ -26,5 +26,8 @@ var player = {
     }
   ],
   colorUpg: {},
+  stats:{
+    playTime: 0
+  },
   lastUpdateTick: Date.now()
 }

@@ -38,6 +38,19 @@ button{
   color: #00f
 }
 
+.navigation-container{
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.navigation-button{
+  font-size: 20px;
+  min-width: 200px;
+  border: 1px solid black;
+  padding: 10px;
+  text-align: center;
+}
+
 .color-producer {
   width: 1000px;
   border: 2px solid black;

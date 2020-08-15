@@ -75,6 +75,16 @@ var app = new Vue({
     format(num, dp, sci, full){
       return format(num, dp, sci, full)
     },
+    navigateTab(name){
+      let tabs = document.getElementsByClassName("tab")
+      for (let tab of tabs){
+        tab.style = "display: none"
+      }
+      let seltabs = document.getElementsByClassName(name)
+      for (let seltab of seltabs){
+        seltab.style = "display: block"
+      }
+    },
     gameLoop(){
       gameLoop(this)
     }
