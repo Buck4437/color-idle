@@ -37,9 +37,6 @@
             <button class="color-adder-button"
                    :class="{'button--disabled': canGenerateColor(0) !== true}"
                    @click="generateColor(0)">
-              <div v-if="canGenerateColor(0) === false">
-                Get {{format(player.color[1].requirement)}} Red
-              </div>
               <div v-if="canGenerateColor(0) !== false" class="color-adder-text-red"
                                                        :class="{'color-adder-text--disabled': canGenerateColor(0) !== true}">
                 + {{format(formula.gain.color[0]().amount, 1)}} Red
@@ -106,7 +103,7 @@
                    :class="{'button--disabled': canGenerateColor(1) !== true}"
                    @click="generateColor(1)">
               <div v-if="canGenerateColor(1) === false">
-                Get {{format(player.color[1].requirement)}} Green
+                Get 1000 Red
               </div>
               <div v-if="canGenerateColor(1) !== false">
                 Reset previous color
@@ -183,7 +180,7 @@
                    :class="{'button--disabled': canGenerateColor(2) !== true}"
                    @click="generateColor(2)">
               <div v-if="canGenerateColor(2) === false">
-                Get {{format(player.color[1].requirement)}} Blue
+                Get 1000 Green
               </div>
               <div v-if="canGenerateColor(2) !== false">
                 Reset all previous colors

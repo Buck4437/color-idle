@@ -19,9 +19,11 @@ const formula = {
       },
       function (red){
         if (red === undefined) red = player.color[0].amount
-        if (red < player.color[1].requirement) red = 0
+        if (red == 0) red = 1 // because of Math.log10(red)
 
-        let base = red/player.color[1].requirement
+        let base = 1
+        base = 10 ** (Math.log10(red)/3 - 1)
+        if (red < 1000) base = 0
 
         let multi = 1
         multi *= formula.colorEffect[2]()
@@ -37,10 +39,11 @@ const formula = {
       },
       function (green){
         if (green === undefined) green = player.color[1].amount
-        if (green < player.color[1].requirement) green = 0
+        if (green == 0) green = 1 // because of Math.log10(green)
 
-        let base = green/player.color[2].requirement
-        if (base < 1) base = 0
+        let base = 1
+        base = 10 ** (Math.log10(green)/3 - 1)
+        if (green < 1000) base = 0
 
         let multi = 1
         multi *= player.colorUpg.hasOwnProperty("32") ? formula.cUpg["32"](player.colorUpg["32"]).effect : 1

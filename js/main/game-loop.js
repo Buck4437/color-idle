@@ -1,5 +1,5 @@
-function gameLoop(that){
-  let s = (Date.now() - that.player.lastUpdateTick)/1000
+function gameLoop(that, s){
+  if (s === undefined) s = (Date.now() - that.player.lastUpdateTick)/1000
 
   //resolve this mess soon
   for (let i=0; i <= that.player.color.length-1; i++){
