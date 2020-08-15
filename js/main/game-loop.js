@@ -35,6 +35,7 @@ function gameLoop(that, s){
     }
   }
 
+  that.player.stats.playTime += s
 
   that.player.lastUpdateTick = Date.now()
 }

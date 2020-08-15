@@ -75,6 +75,9 @@ var app = new Vue({
     format(num, dp, sci, full){
       return format(num, dp, sci, full)
     },
+    formatDate(seconds, pMode){
+      return formatDate(seconds, pMode)
+    },
     navigateTab(name){
       let tabs = document.getElementsByClassName("tab")
       for (let tab of tabs){
