@@ -33,8 +33,8 @@
         <button class="navigation-button" @click="navigateTab('stats-tab')">
           Stats
         </button>
-        <button class="navigation-button" @click="navigateTab('settings-tab')">
-          Settings
+        <button class="navigation-button" @click="navigateTab('options-tab')">
+          Options
         </button>
       </div>
       <div class="tab color-tab">
@@ -57,9 +57,9 @@
               </div>
             </button>
           </div>
-          <div class="color-upgrade-coll-button-red" @click="collapse('color-upgrade-coll-button-red', 'color-upgrade-coll-container-red')">
+          <div v-if="player.color[0].isUnlockedUpgrade" class="color-upgrade-coll-button-red" @click="collapse('color-upgrade-coll-button-red', 'color-upgrade-coll-container-red')">
 
-          </div>
+          </div v-if="player.color[0].isUnlockedUpgrade">
           <div class="color-upgrade-coll-container-red">
             <div class="color-upgrade-container">
               <button class="color-upgrade-button" @click="buyUpg('11')">
@@ -128,10 +128,10 @@
               </div>
             </button>
           </div>
-          <div class="color-upgrade-coll-button-green" @click="collapse('color-upgrade-coll-button-green', 'color-upgrade-coll-container-green')">
+          <div v-if="player.color[1].isUnlockedUpgrade" class="color-upgrade-coll-button-green" @click="collapse('color-upgrade-coll-button-green', 'color-upgrade-coll-container-green')">
 
           </div>
-          <div class="color-upgrade-coll-container-green">
+          <div v-if="player.color[1].isUnlockedUpgrade" class="color-upgrade-coll-container-green">
             <div class="color-effect-container">
               <div class="color-effect-text">
                 Your highest amount of Green ({{format(player.color[1].highest)}}) multiplies previous color by x{{format(formula.colorEffect[1](), 2)}}.<br>
@@ -205,10 +205,10 @@
               </div>
             </button>
           </div>
-          <div class="color-upgrade-coll-button-blue" @click="collapse('color-upgrade-coll-button-blue', 'color-upgrade-coll-container-blue')">
+          <div v-if="player.color[2].isUnlockedUpgrade" class="color-upgrade-coll-button-blue" @click="collapse('color-upgrade-coll-button-blue', 'color-upgrade-coll-container-blue')">
 
           </div>
-          <div class="color-upgrade-coll-container-blue">
+          <div v-if="player.color[2].isUnlockedUpgrade" class="color-upgrade-coll-container-blue">
             <div class="color-effect-container">
               <div class="color-effect-text">
                 Your highest amount of Blue ({{format(player.color[2].highest)}}) multiplies all previous colors by x{{format(formula.colorEffect[2](), 2)}}.<br>
@@ -275,8 +275,12 @@
       <div class="tab stats-tab" style="display: none">
         <span>Total play time: {{formatDate(player.stats.playTime)}}</span>
       </div>
-      <div class="tab settings-tab" style="display: none">
-        Setting Placeholder
+      <div class="tab options-tab" style="display: none">
+        <div>
+          <button class="options-button" @click="options.save()">Save</button>
+        </div>
+        <br>
+        Game autosaves every 15 seconds
       </div>
     </div>
   </body>
@@ -285,6 +289,7 @@
   <script src="js/main/constant.js"></script>
   <script src="js/main/player.js"></script>
   <script src="js/main/game-loop.js"></script>
+  <script src="js/main/options.js"></script>
 
   <script src="js/test/dev.js"></script>
 

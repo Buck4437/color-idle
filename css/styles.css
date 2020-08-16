@@ -160,3 +160,13 @@ button{
   text-align: center;
   border: 1px solid black;
 }
+
+.options-tab{
+  font-size: 15px;
+}
+
+.options-button{
+  width: 200px;
+  height: 100px;
+  border: 1px solid black;
+}

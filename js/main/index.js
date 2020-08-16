@@ -5,7 +5,8 @@ var app = new Vue({
     color,
     colorUpgInfo,
     formula,
-    player
+    player,
+    options
   },
   methods:{
     canBuyUpg(u){
