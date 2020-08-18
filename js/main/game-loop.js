@@ -1,6 +1,15 @@
 function gameLoop(that, s){
-  if (s === undefined) s = (Date.now() - that.player.lastUpdateTick)/1000
-
+  if (s === undefined){
+    s = (Date.now() - that.player.lastUpdateTick)/1000
+    //simple offline progress circuit
+    if (s > 60){
+      for (let i = 1; i <= 1000; i++){
+        gameLoop(that, s/1000) //1000 ticks
+      }
+    }
+    $(".game-container").css("display", "block")
+    $(".offline-progress-container").css("display", "none")
+  }
   //resolve this mess soon
   for (let i=0; i <= that.player.color.length-1; i++){
     if (that.player.color[i].timer.gt(0)){

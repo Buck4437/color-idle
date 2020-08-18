@@ -1,15 +1,4 @@
-@font-face {
-    font-family: monoid;
-    src: url("../css/fonts/Monoid-Regular.ttf");
-}
-
-@font-face {
-    font-family: monoid;
-    src: url("../css/fonts/Monoid-Bold.ttf");
-    font-weight: bold;
-}
-
 body{
-  font-family: monoid;
-  font-size: 10px;
+  font-family: 'Inconsolata', monospace;
+  font-size: 15px;
 }
