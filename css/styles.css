@@ -4,7 +4,7 @@
 
 button{
   font-family: monoid;
-  font-size: 15px;
+  font-size: 10px;
   background-color: white;
   cursor: pointer;
   user-select: none;
@@ -20,6 +20,7 @@ button{
 }
 
 .red-currency, .green-currency, .blue-currency{
+  font-size: 20px;
   min-width: 200px;
   border: 1px solid black;
   padding: 10px;
@@ -62,14 +63,15 @@ button{
   display: flex;
   justify-content: space-between;
   padding: 10px;
-  height: 80px;
+  height: 60px;
 }
 
 .color-adder-currency-container{
   display: flex;
   align-items: center;
   padding: 10px;
-  width: 200px;
+  width: 150px;
+  font-size: 13px;
   border: 1px solid black;
 }
 
@@ -107,8 +109,8 @@ button{
 
 .color-upgrade-coll-button-red, .color-upgrade-coll-button-green, .color-upgrade-coll-button-blue{
   cursor: pointer;
-  padding: 0 10px;
-  height: 30px;
+  padding: 0 5px;
+  height: 20px;
   border-top: 2px solid black;
   border-bottom: 2px solid black;
   background-color: #eee
@@ -161,8 +163,8 @@ button{
   border: 1px solid black;
 }
 
-.options-tab{
-  font-size: 15px;
+.options-tab button{
+  font-size: 20px;
 }
 
 .options-button{

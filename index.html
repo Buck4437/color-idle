@@ -58,9 +58,8 @@
             </button>
           </div>
           <div v-if="player.color[0].isUnlockedUpgrade" class="color-upgrade-coll-button-red" @click="collapse('color-upgrade-coll-button-red', 'color-upgrade-coll-container-red')">
-
-          </div v-if="player.color[0].isUnlockedUpgrade">
-          <div class="color-upgrade-coll-container-red">
+          </div>
+          <div v-if="player.color[0].isUnlockedUpgrade" class="color-upgrade-coll-container-red">
             <div class="color-upgrade-container">
               <button class="color-upgrade-button" @click="buyUpg('11')">
                 <div>
@@ -116,15 +115,15 @@
             <button class="color-adder-button"
                    :class="{'button--disabled': canGenerateColor(1) !== true}"
                    @click="generateColor(1)">
-              <div v-if="canGenerateColor(1) === false">
+              <div v-show="canGenerateColor(1) === false">
                 Get 1000 Red
               </div>
-              <div v-if="canGenerateColor(1) !== false">
+              <div v-show="canGenerateColor(1) !== false">
                 Reset previous color
               </div>
-              <div v-if="canGenerateColor(1) !== false" class="color-adder-text-green">
-                <span v-if="canGenerateColor(1) === true">+ {{format(formula.gain.color[1]().amount, 1)}} Green</span>
-                <span v-if="canGenerateColor(1) === 'generating'">+ {{format(player.color[1].gainOnReset, 1)}} Green</span>
+              <div v-show="canGenerateColor(1) !== false" class="color-adder-text-green">
+                <span v-show="canGenerateColor(1) === true">+ {{format(formula.gain.color[1]().amount, 1)}} Green</span>
+                <span v-show="canGenerateColor(1) === 'generating'">+ {{format(player.color[1].gainOnReset, 1)}} Green</span>
               </div>
             </button>
           </div>
@@ -193,15 +192,15 @@
             <button class="color-adder-button"
                    :class="{'button--disabled': canGenerateColor(2) !== true}"
                    @click="generateColor(2)">
-              <div v-if="canGenerateColor(2) === false">
+              <div  v-show="canGenerateColor(2) === false">
                 Get 1000 Green
               </div>
-              <div v-if="canGenerateColor(2) !== false">
+              <div  v-show="canGenerateColor(2) !== false">
                 Reset all previous colors
               </div>
-              <div v-if="canGenerateColor(2) !== false" class="color-adder-text-blue">
-                <span v-if="canGenerateColor(2) === true">+ {{format(formula.gain.color[2]().amount, 1)}} Blue</span>
-                <span v-if="canGenerateColor(2) === 'generating'">+ {{format(player.color[2].gainOnReset, 1)}} Blue</span>
+              <div  v-show="canGenerateColor(2) !== false" class="color-adder-text-blue">
+                <span  v-show="canGenerateColor(2) === true">+ {{format(formula.gain.color[2]().amount, 1)}} Blue</span>
+                <span  v-show="canGenerateColor(2) === 'generating'">+ {{format(player.color[2].gainOnReset, 1)}} Blue</span>
               </div>
             </button>
           </div>
@@ -278,18 +277,24 @@
       <div class="tab options-tab" style="display: none">
         <div>
           <button class="options-button" @click="options.save()">Save</button>
+          <button class="options-button" @click="options.reset()">Reset</button>
+        </div>
+        <div>
+          <button class="options-button" @click="options.import()">Import</button>
+          <button class="options-button" @click="options.export()">Export</button>
         </div>
         <br>
         Game autosaves every 15 seconds
+        <input id="options-export-field" style="display: none;"></input>
       </div>
     </div>
   </body>
   <script src="js/main/format.js"></script>
   <script src="js/main/formula.js"></script>
   <script src="js/main/constant.js"></script>
+  <script src="js/main/options.js"></script>
   <script src="js/main/player.js"></script>
   <script src="js/main/game-loop.js"></script>
-  <script src="js/main/options.js"></script>
 
   <script src="js/test/dev.js"></script>
 

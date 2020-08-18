@@ -1,9 +1,15 @@
 @font-face {
     font-family: monoid;
-    src: url("../css/fonts/Monoid-Regular.ttf")
+    src: url("../css/fonts/Monoid-Regular.ttf");
+}
+
+@font-face {
+    font-family: monoid;
+    src: url("../css/fonts/Monoid-Bold.ttf");
+    font-weight: bold;
 }
 
 body{
   font-family: monoid;
-  font-size: 20px;
+  font-size: 10px;
 }
