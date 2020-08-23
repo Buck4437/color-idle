@@ -33,6 +33,9 @@ const defaultPlayer = function (){
     stats:{
       playTime: 0
     },
+    options:{
+      theme: 0
+    },
     version: 0,
     lastUpdateTick: Date.now()
   }

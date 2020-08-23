@@ -1,6 +1,6 @@
 const options = {
   save(){
-    localStorage.setItem('player', JSON.stringify(player))
+    localStorage.setItem('colorGameRemakeSave', JSON.stringify(player))
     console.log("Game saved.")
     clearInterval(saveInterval)
     saveInterval = setInterval(options.save, 15000)
@@ -8,7 +8,7 @@ const options = {
   reset(){
     if (prompt("Enter RESET in ALL CAPS to reset the game.") === "RESET"){
       clearInterval(saveInterval)
-      localStorage.clear()
+      localStorage.removeItem("colorGameRemakeSave")
       window.location.reload()
     }
   },
@@ -18,8 +18,9 @@ const options = {
     if (isValidSave(saveStr)){
       clearInterval(saveInterval)
       let save = window.atob(saveStr)
-      localStorage.setItem('player', save)
+      localStorage.setItem("colorGameRemakeSave", save)
       window.location.reload()
+      return
     }
     alert("Invalid save!")
   },
@@ -38,9 +39,20 @@ const options = {
     }
   },
   load(){
-    let save = JSON.parse(localStorage.getItem('player'))
+    let save = JSON.parse(localStorage.getItem("colorGameRemakeSave"))
     if (save === null) return
     player = saveToDecimal(save, defaultPlayer())
+  },
+  theme: {
+    switch(){
+      player.options.theme ++
+      if (player.options.theme >= themes.length){
+        player.options.theme = 0
+      }
+    },
+    current(){
+      return themes[player.options.theme]
+    }
   }
 }
 

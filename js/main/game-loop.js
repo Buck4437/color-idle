@@ -30,7 +30,7 @@ function gameLoop(that, s){
   //unlock stuff
   for (let i = 2; i >= 0; i--){
     if(that.player.color[i-1] !== undefined){
-      if (that.player.color[i-1].amount.gte(200)){
+      if (that.player.color[i-1].amount.gte(500)){
         that.player.color[i].isUnlocked = true
       }
     }

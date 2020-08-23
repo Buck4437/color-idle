@@ -2,15 +2,11 @@ const color = {
   //used to display color
   normal: ["red", "green", "blue"],
   noun: ["Red", "Green", "Blue"],
-  hex: ["#f00", "#0f0", "#00f"],
-  palette:{
-    default: "#000",
-    red: "#f00",
-    green: "#0f0",
-    blue: "#00f",
-    lightGrey: "#aaa"
-  }
+  hex: ["#f00", "#0f0", "#00f"]
 }
+
+
+const themes = ['Light', 'Dark']
 
 const colorUpgInfo = {
   11:{

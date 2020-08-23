@@ -1,4 +1,5 @@
 body{
   font-family: 'Inconsolata', monospace;
   font-size: 15px;
+  transition: background-color 0.5s, color 0.5s, border-color 0.5s; /*for switching theme */
 }

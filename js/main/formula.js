@@ -64,12 +64,13 @@ const formula = {
     },
     function (){
       let effect = new Decimal(1)
-                  .times(Decimal.pow(Decimal.log10(player.color[1].highest.times(10).plus(1)), 4).plus(1)) //log(10n+1)^4+1
+                  .times(player.color[1].highest.times(2.5).plus(1).pow(0.8)) //(2.5x+1)^0.8
+
       return effect
     },
     function (){
       let effect = new Decimal(1)
-                  .times(Decimal.pow(Decimal.log10(player.color[2].highest.times(10).plus(1)), 4).plus(1)) //log(10n+1)^4+1
+                  .times(player.color[2].highest.times(2.5).plus(1).pow(0.8)) //(2.5x+1)^0.8
       return effect
     }
   ],

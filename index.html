@@ -2,17 +2,18 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/styles.css">
-    <link rel="stylesheet" type="text/css" href="css/about.css">
-    <link rel="icon" href="icon.png">
     <script src="js/libraries/jquery-3.4.1.js"></script>
     <script src="js/libraries/vue.js"></script>
     <script src="js/libraries/break_infinity.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/about.css">
+    <link rel="icon" href="icon.png">
     <title>Color Game Remake</title>
   </head>
   <body>
     <div id="app">
+      <link rel="stylesheet" type="text/css" :href="'css/' + options.theme.current() + '.css'">
+      <!-- <link rel="stylesheet" type="text/css" href="css/Dark.css"> -->
       <div class="game-container" style="display: none">
         <div class="currency-container">
           <div class="red-currency">
@@ -39,21 +40,22 @@
             Options
           </button>
         </div>
-        <hr>
+        <br>
         <div class="tab color-tab">
           <div class="color-producer">
             <div class="color-adder-container">
               <div class="color-adder-currency-container">
-                <div class="color-adder-red">
-                  Red: {{format(player.color[0].amount)}}
+                <div class="color-adder">
+                  Red: <span class="color-adder-red">{{format(player.color[0].amount)}}</span>
                 </div>
               </div>
               <div class="color-progress-container">
                 <div class="color-progress-red" :style="{width: colorProgressWidth(0)}"></div>
               </div>
-              <button class="color-adder-button"
-                     :class="{'button--disabled': canGenerateColor(0) !== true}"
-                     @click="generateColor(0)">
+              <button class="color-adder-button" @click="generateColor(0)"
+                     :class="{'button--disabled': canGenerateColor(0) !== true,
+                              'color-adder-button--disabled': canGenerateColor(0) !== true,
+                              'color-adder-button--auto': player.color[0].auto == true}">
                 <div v-if="canGenerateColor(0) !== false" class="color-adder-text-red"
                                                          :class="{'color-adder-text--disabled': canGenerateColor(0) !== true}">
                   + {{format(formula.gain.color[0]().amount, 1)}} Red
@@ -64,7 +66,9 @@
             </div>
             <div v-if="player.color[0].isUnlockedUpgrade" class="color-upgrade-coll-container-red">
               <div class="color-upgrade-container">
-                <button class="color-upgrade-button" @click="buyUpg('11')">
+                <button class="color-upgrade-button" @click="buyUpg('11')"
+                        :class="{'color-upgrade-button--disabled': canBuyUpg('11') === false,
+                                 'color-upgrade-button--max': canBuyUpg('11') === 'max'}">
                   <div>
                     {{colorUpgInfo["11"].text}}
                   </div>
@@ -75,7 +79,9 @@
                     Production Time: {{format(1/formula.gain.color[0]().speed, 2)}}s
                   </div>
                 </button>
-                <button class="color-upgrade-button" @click="buyUpg('12')">
+                <button class="color-upgrade-button" @click="buyUpg('12')"
+                       :class="{'color-upgrade-button--disabled': canBuyUpg('12') === false,
+                                'color-upgrade-button--max': canBuyUpg('12') === 'max'}">
                   <div>
                     {{colorUpgInfo["12"].text}}
                   </div>
@@ -86,7 +92,9 @@
                     Multiplier: x{{format(formula.gain.color[0]().multi, 2)}}
                   </div>
                 </button>
-                <button v-if="(player.colorUpg['13']||0) < 1" class="color-upgrade-button" @click="buyUpg('13')">
+                <button v-if="(player.colorUpg['13']||0) < 1" class="color-upgrade-button" @click="buyUpg('13')"
+                                                             :class="{'color-upgrade-button--disabled': canBuyUpg('13') === false,
+                                                                      'color-upgrade-button--max': canBuyUpg('13') === 'max'}">
                   <div>
                     {{colorUpgInfo["13"].text}}
                   </div>
@@ -94,12 +102,14 @@
                     Cost: {{format(formula.cUpg["13"](player.colorUpg["13"]).cost)}} Red
                   </div>
                 </button>
-                <button v-if="(player.colorUpg['13']||0) >= 1" class="color-auto" @click="toggleAuto(0)">
+                <button v-if="(player.colorUpg['13']||0) >= 1" class="color-auto" @click="toggleAuto(0)"
+                                                              :class="{'color-auto--manual': !player.color[0].auto,
+                                                                       'color-auto--auto': player.color[0].auto}">
                   <div class="color-auto-text">
                     Mode: {{this.player.color[0].auto ? "Auto" : "Manual"}}
                   </div>
                   <div>
-                    Automation Efficiency: {{100*formula.cUpg["13"]().effect}}%
+                    Auto Efficiency: {{100*formula.cUpg["13"]().effect}}%
                   </div>
                 </button>
               </div>
@@ -108,25 +118,26 @@
           <div v-if="player.color[1].isUnlocked" class="color-producer">
             <div class="color-adder-container">
               <div class="color-adder-currency-container">
-                <div class="color-adder-red">
-                  Green: {{format(player.color[1].amount)}}
+                <div class="color-adder">
+                  Green: <span class="color-adder-green">{{format(player.color[1].amount)}}</span>
                 </div>
               </div>
               <div class="color-progress-container">
                 <div class="color-progress-green" :style="{width: colorProgressWidth(1)}"></div>
               </div>
-              <button class="color-adder-button"
-                     :class="{'button--disabled': canGenerateColor(1) !== true}"
-                     @click="generateColor(1)">
+              <button class="color-adder-button" @click="generateColor(1)"
+                     :class="{'button--disabled': canGenerateColor(1) !== true,
+                              'color-adder-button--disabled': canGenerateColor(1) !== true,
+                              'color-adder-button--auto': player.color[1].auto == true}">
                 <div v-show="canGenerateColor(1) === false">
                   Get 1000 Red
                 </div>
                 <div v-show="canGenerateColor(1) !== false">
                   Reset previous color
                 </div>
-                <div v-show="canGenerateColor(1) !== false" class="color-adder-text-green">
-                  <span v-show="canGenerateColor(1) === true">+ {{format(formula.gain.color[1]().amount, 1)}} Green</span>
-                  <span v-show="canGenerateColor(1) === 'generating'">+ {{format(player.color[1].gainOnReset, 1)}} Green</span>
+                <div v-show="canGenerateColor(1) !== false">
+                  <span v-show="canGenerateColor(1) === true" class="color-adder-text-green">+ {{format(formula.gain.color[1]().amount, 1)}} Green</span>
+                  <span v-show="canGenerateColor(1) === 'generating'" class="color-adder-text--disabled">+ {{format(player.color[1].gainOnReset, 1)}} Green</span>
                 </div>
               </button>
             </div>
@@ -136,12 +147,14 @@
             <div v-if="player.color[1].isUnlockedUpgrade" class="color-upgrade-coll-container-green">
               <div class="color-effect-container">
                 <div class="color-effect-text">
-                  Your highest amount of Green ({{format(player.color[1].highest)}}) multiplies previous color by x{{format(formula.colorEffect[1](), 2)}}.<br>
+                  Your highest amount of Green (<span class="color-effect-green">{{format(player.color[1].highest)}}</span>) multiplies previous color by x<span class="color-effect-green">{{format(formula.colorEffect[1](), 2)}}</span>.<br>
                   This amount resets when you perform any higher level of reset.
                 </div>
               </div>
               <div class="color-upgrade-container">
-                <button class="color-upgrade-button" @click="buyUpg('21')">
+                <button class="color-upgrade-button" @click="buyUpg('21')"
+                        :class="{'color-upgrade-button--disabled': canBuyUpg('21') === false,
+                                 'color-upgrade-button--max': canBuyUpg('21') === 'max'}">
                   <div>
                     {{colorUpgInfo["21"].text}}
                   </div>
@@ -152,7 +165,9 @@
                     Production Time: {{format(1/formula.gain.color[1]().speed, 2)}}s
                   </div>
                 </button>
-                <button class="color-upgrade-button" @click="buyUpg('22')">
+                <button class="color-upgrade-button" @click="buyUpg('22')"
+                        :class="{'color-upgrade-button--disabled': canBuyUpg('22') === false,
+                                 'color-upgrade-button--max': canBuyUpg('22') === 'max'}">
                   <div>
                     {{colorUpgInfo["22"].text}}
                   </div>
@@ -163,7 +178,9 @@
                     Multiplier: x{{format(formula.gain.color[1]().multi, 2)}}
                   </div>
                 </button>
-                <button v-if="(player.colorUpg['23']||0) < 1" class="color-upgrade-button" @click="buyUpg('23')">
+                <button v-if="(player.colorUpg['23']||0) < 1" class="color-upgrade-button" @click="buyUpg('23')"
+                                                             :class="{'color-upgrade-button--disabled': canBuyUpg('23') === false,
+                                                                      'color-upgrade-button--max': canBuyUpg('23') === 'max'}">
                   <div>
                     {{colorUpgInfo["23"].text}}
                   </div>
@@ -171,7 +188,9 @@
                     Cost: {{format(formula.cUpg["23"](player.colorUpg["23"]).cost)}} Green
                   </div>
                 </button>
-                <button v-if="(player.colorUpg['23']||0) >= 1" class="color-auto" @click="toggleAuto(1)">
+                <button v-if="(player.colorUpg['23']||0) >= 1" class="color-auto" @click="toggleAuto(1)"
+                                                              :class="{'color-auto--manual': !player.color[1].auto,
+                                                                       'color-auto--auto': player.color[1].auto}">
                   <div class="color-auto-text">
                     Mode: {{this.player.color[1].auto ? "Auto" : "Manual"}}
                   </div>
@@ -185,25 +204,26 @@
           <div v-if="player.color[2].isUnlocked" class="color-producer">
             <div class="color-adder-container">
               <div class="color-adder-currency-container">
-                <div class="color-adder-blue">
-                  Blue: {{format(player.color[2].amount)}}
+                <div class="color-adder">
+                  Blue: <span class="color-adder-blue">{{format(player.color[2].amount)}}</span>
                 </div>
               </div>
               <div class="color-progress-container">
                 <div class="color-progress-blue" :style="{width: colorProgressWidth(2)}"></div>
               </div>
-              <button class="color-adder-button"
-                     :class="{'button--disabled': canGenerateColor(2) !== true}"
-                     @click="generateColor(2)">
-                <div  v-show="canGenerateColor(2) === false">
+              <button class="color-adder-button" @click="generateColor(2)"
+                     :class="{'button--disabled': canGenerateColor(2) !== true,
+                              'color-adder-button--disabled': canGenerateColor(2) !== true,
+                              'color-adder-button--auto': player.color[2].auto == true}">
+                <div v-show="canGenerateColor(2) === false">
                   Get 1000 Green
                 </div>
-                <div  v-show="canGenerateColor(2) !== false">
+                <div v-show="canGenerateColor(2) !== false">
                   Reset all previous colors
                 </div>
-                <div  v-show="canGenerateColor(2) !== false" class="color-adder-text-blue">
-                  <span  v-show="canGenerateColor(2) === true">+ {{format(formula.gain.color[2]().amount, 1)}} Blue</span>
-                  <span  v-show="canGenerateColor(2) === 'generating'">+ {{format(player.color[2].gainOnReset, 1)}} Blue</span>
+                <div v-show="canGenerateColor(2) !== false">
+                  <span v-show="canGenerateColor(2) === true" class="color-adder-text-blue">+ {{format(formula.gain.color[2]().amount, 1)}} Blue</span>
+                  <span v-show="canGenerateColor(2) === 'generating'" class="color-adder-text--disabled">+ {{format(player.color[2].gainOnReset, 1)}} Blue</span>
                 </div>
               </button>
             </div>
@@ -213,12 +233,14 @@
             <div v-if="player.color[2].isUnlockedUpgrade" class="color-upgrade-coll-container-blue">
               <div class="color-effect-container">
                 <div class="color-effect-text">
-                  Your highest amount of Blue ({{format(player.color[2].highest)}}) multiplies all previous colors by x{{format(formula.colorEffect[2](), 2)}}.<br>
+                  Your highest amount of Blue (<span class="color-effect-blue">{{format(player.color[2].highest)}}</span>) multiplies all previous colors by x<span class="color-effect-blue">{{format(formula.colorEffect[2](), 2)}}</span>.<br>
                   This amount resets when you perform any higher level of reset.
                 </div>
               </div>
               <div class="color-upgrade-container">
-                <button class="color-upgrade-button" @click="buyUpg('31')">
+                <button class="color-upgrade-button" @click="buyUpg('31')"
+                        :class="{'color-upgrade-button--disabled': canBuyUpg('31') === false,
+                                 'color-upgrade-button--max': canBuyUpg('31') === 'max'}">
                   <div>
                     {{colorUpgInfo["31"].text}}
                   </div>
@@ -229,7 +251,9 @@
                     Production Time: {{format(1/formula.gain.color[2]().speed, 2)}}s
                   </div>
                 </button>
-                <button class="color-upgrade-button" @click="buyUpg('32')">
+                <button class="color-upgrade-button" @click="buyUpg('32')"
+                        :class="{'color-upgrade-button--disabled': canBuyUpg('32') === false,
+                                 'color-upgrade-button--max': canBuyUpg('32') === 'max'}">
                   <div>
                     {{colorUpgInfo["32"].text}}
                   </div>
@@ -240,7 +264,9 @@
                     Multiplier: x{{format(formula.gain.color[2]().multi, 2)}}
                   </div>
                 </button>
-                <button class="color-upgrade-button" @click="buyUpg('33')">
+                <button class="color-upgrade-button" @click="buyUpg('33')"
+                        :class="{'color-upgrade-button--disabled': canBuyUpg('33') === false,
+                                 'color-upgrade-button--max': canBuyUpg('33') === 'max'}">
                   <div>
                     {{colorUpgInfo["33"].text}}
                   </div>
@@ -251,7 +277,9 @@
                     Effect: +{{format(formula.cUpg["33"](player.colorUpg["33"]).effect*100)}}%
                   </div>
                 </button>
-                <button v-if="(player.colorUpg['34']||0) < 1" class="color-upgrade-button" @click="buyUpg('34')">
+                <button v-if="(player.colorUpg['34']||0) < 1" class="color-upgrade-button" @click="buyUpg('34')"
+                                                              :class="{'color-upgrade-button--disabled': canBuyUpg('34') === false,
+                                                                       'color-upgrade-button--max': canBuyUpg('34') === 'max'}">
                   <div>
                     {{colorUpgInfo["34"].text}}
                   </div>
@@ -259,7 +287,9 @@
                     Cost: {{format(formula.cUpg["34"](player.colorUpg["34"]).cost)}} Blue
                   </div>
                 </button>
-                <button v-if="(player.colorUpg['34']||0) >= 1" class="color-auto" @click="toggleAuto(2)">
+                <button v-if="(player.colorUpg['34']||0) >= 1" class="color-auto" @click="toggleAuto(2)"
+                                                              :class="{'color-auto--manual': !player.color[2].auto,
+                                                                       'color-auto--auto': player.color[2].auto}">
                   <div class="color-auto-text">
                     Mode: {{this.player.color[2].auto ? "Auto" : "Manual"}}
                   </div>
@@ -285,6 +315,9 @@
           <div>
             <button class="options-button" @click="options.import()">Import</button>
             <button class="options-button" @click="options.export()">Export</button>
+          </div>
+          <div>
+            <button class="options-button" @click="options.theme.switch()">Theme: {{options.theme.current()}}</button>
           </div>
           <br>
           Game autosaves every 15 seconds
