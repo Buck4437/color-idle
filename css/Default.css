@@ -14,6 +14,7 @@ button{
   cursor: pointer;
   transition-duration: 0.2s;
   user-select: none;
+  align-items: stretch; /* for flexboxes */
 }
 
 button:hover{
@@ -140,7 +141,6 @@ button:hover{
 .color-adder-button--disabled:hover, .color-adder-button--auto:hover{
   background-color: #AAAAAA;
 }
-
 
 .color-upgrade-coll-button-red, .color-upgrade-coll-button-green, .color-upgrade-coll-button-blue{
   cursor: pointer;

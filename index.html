@@ -57,8 +57,7 @@
                      :class="{'button--disabled': canGenerateColor(0) !== true,
                               'color-adder-button--disabled': canGenerateColor(0) !== true,
                               'color-adder-button--auto': player.color[0].auto == true}">
-                <div v-if="canGenerateColor(0) !== false" class="color-adder-text-red"
-                                                         :class="{'color-adder-text--disabled': canGenerateColor(0) !== true}">
+                <div class="color-adder-text">
                   + {{format(formula.gain.color[0]().amount, 1)}} Red
                 </div>
               </button>
