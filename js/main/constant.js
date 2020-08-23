@@ -16,7 +16,7 @@ const colorUpgInfo = {
     scaling: 2
   },
   12:{
-    text: "You gain x1.5 more Red",
+    text: "Gain x1.5 more Red",
     cap: 5,
     baseCost: 5,
     scaling: 3
@@ -34,7 +34,7 @@ const colorUpgInfo = {
     scaling: 2
   },
   22:{
-    text: "You gain x1.5 more Green",
+    text: "Gain x1.5 more Green",
     cap: 5,
     baseCost: 5,
     scaling: 3
@@ -52,7 +52,7 @@ const colorUpgInfo = {
     scaling: 2
   },
   32:{
-    text: "You gain x1.5 more Blue",
+    text: "Gain x1.5 more Blue",
     cap: 4,
     baseCost: 5,
     scaling: 3

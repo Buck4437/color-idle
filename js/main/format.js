@@ -19,7 +19,7 @@ function format(num, dp, scidp, showFullIfSmallerThanThis){
     scidp = 2
   }
   if(num.lt(showFullIfSmallerThanThis||1000)){
-    return num.toNumber().toFixed(dp)
+    return toFixedTrunc(num.toNumber(), dp)
   }else{
     let power = num.exponent
     let mantissa = toFixedTrunc(num.mantissa, scidp)
@@ -45,7 +45,7 @@ function formatDate(s, p){
   let m = div (s, 60)
   s -= 60 * m
   if (p){
-    s = s.toFixed(3)  
+    s = s.toFixed(3)
   }
   else{
     s = Math.floor(s)
