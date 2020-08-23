@@ -1,4 +1,0 @@
-function updateGameData(){
-  updateGameDataLightUpgrades()
-}
-updateGameData()
