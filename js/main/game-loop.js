@@ -31,17 +31,17 @@ function gameLoop(that, s){
   for (let i = 2; i >= 0; i--){
     if(that.player.color[i-1] !== undefined){
       if (that.player.color[i-1].amount.gte(500)){
-        that.player.color[i].isUnlocked = true
+        that.player.unlocks.color[i].isUnlocked = true
       }
     }
     if (that.player.color[i].amount.gt(0)){
-      that.player.color[i].isUnlocked = true
-      that.player.color[i].isUnlockedUpgrade = true
+      that.player.unlocks.color[i].isUnlocked = true
+      that.player.unlocks.color[i].isUnlockedUpgrade = true
     }
     if(that.player.color[i+1] !== undefined){
       if (that.player.color[i+1].isUnlocked){
-        that.player.color[i].isUnlocked = true
-        that.player.color[i].isUnlockedUpgrade = true
+        that.player.unlocks.color[i].isUnlocked = true
+        that.player.unlocks.color[i].isUnlockedUpgrade = true
       }
     }
   }

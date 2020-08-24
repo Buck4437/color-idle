@@ -17,23 +17,42 @@
       <!-- <link rel="stylesheet" type="text/css" href="css/Dark.css"> -->
       <div class="game-container" style="display: none">
         <div class="currency-container">
-          <div class="red-currency">
-            Red: {{format(player.color[0].amount)}}
+          <div class="currency-container-top">
+            <div class="red-currency">
+              Red: {{format(player.color[0].amount)}}
+            </div>
+            <div class="green-currency">
+              Green: {{format(player.color[1].amount)}}
+            </div>
+            <div class="blue-currency">
+              Blue: {{format(player.color[2].amount)}}
+            </div>
           </div>
-          <div class="green-currency">
-            Green: {{format(player.color[1].amount)}}
-          </div>
-          <div class="blue-currency">
-            Blue: {{format(player.color[2].amount)}}
+          <div class="currency-container-bottom">
+            <div class="light-currency-container">
+              <div v-if="player.unlocks.brightness.light" class="light-currency">
+                Light: {{format(player.brightness.light)}}
+              </div>
+              <button v-if="player.unlocks.brightness.light || formula.gain.light().amount.gte(1)"
+                      class="brightness-prestige-button" @click="brighten()"
+                     :class="{'brightness-prestige-button--disabled': formula.gain.light().amount.lt(1)}">
+                <div v-if="!player.unlocks.brightness.light && formula.gain.light().amount.gte(1)">
+                  Brighten.
+                </div>
+                <div v-if="player.unlocks.brightness.light">
+                  + {{format(formula.gain.light().amount)}} Lights
+                </div>
+              </button>
+            </div>
           </div>
         </div>
         <div class="navigation-container">
           <button class="navigation-button" @click="navigateTab('color-tab')">
             Colors
           </button>
-          <!-- <button class="navigation-button" @click="navigateTab('achievement-tab')">
-            Achievements
-          </button> -->
+          <button v-if="player.unlocks.brightness.light" class="navigation-button navigation-button-brightness" @click="navigateTab('brightness-tab')">
+            Brightness
+          </button>
           <button class="navigation-button" @click="navigateTab('stats-tab')">
             Statistics
           </button>
@@ -62,9 +81,9 @@
                 </div>
               </button>
             </div>
-            <div v-if="player.color[0].isUnlockedUpgrade" class="color-upgrade-coll-button-red" @click="collapse('color-upgrade-coll-button-red', 'color-upgrade-coll-container-red')">
+            <div v-if="player.unlocks.color[0].upgrade" class="color-upgrade-coll-button-red" @click="collapse('color-upgrade-coll-button-red', 'color-upgrade-coll-container-red')">
             </div>
-            <div v-if="player.color[0].isUnlockedUpgrade" class="color-upgrade-coll-container-red">
+            <div v-if="player.unlocks.color[0].upgrade" class="color-upgrade-coll-container-red">
               <div class="color-upgrade-container">
                 <button class="color-upgrade-button" @click="buyUpg('11')"
                         :class="{'color-upgrade-button--disabled': canBuyUpg('11') === false,
@@ -115,7 +134,7 @@
               </div>
             </div>
           </div>
-          <div v-if="player.color[1].isUnlocked" class="color-producer">
+          <div v-if="player.unlocks.color[1].color" class="color-producer">
             <div class="color-adder-container">
               <div class="color-adder-currency-container">
                 <div class="color-adder">
@@ -141,10 +160,10 @@
                 </div>
               </button>
             </div>
-            <div v-if="player.color[1].isUnlockedUpgrade" class="color-upgrade-coll-button-green" @click="collapse('color-upgrade-coll-button-green', 'color-upgrade-coll-container-green')">
+            <div v-if="player.unlocks.color[1].upgrade" class="color-upgrade-coll-button-green" @click="collapse('color-upgrade-coll-button-green', 'color-upgrade-coll-container-green')">
 
             </div>
-            <div v-if="player.color[1].isUnlockedUpgrade" class="color-upgrade-coll-container-green">
+            <div v-if="player.unlocks.color[1].upgrade" class="color-upgrade-coll-container-green">
               <div class="color-effect-container">
                 <div class="color-effect-text">
                   Your highest amount of Green (<span class="color-effect-green">{{format(player.color[1].highest)}}</span>) multiplies previous color by x<span class="color-effect-green">{{format(formula.colorEffect[1](), 2)}}</span>.<br>
@@ -201,7 +220,7 @@
               </div>
             </div>
           </div>
-          <div v-if="player.color[2].isUnlocked" class="color-producer">
+          <div v-if="player.unlocks.color[2].color" class="color-producer">
             <div class="color-adder-container">
               <div class="color-adder-currency-container">
                 <div class="color-adder">
@@ -227,10 +246,10 @@
                 </div>
               </button>
             </div>
-            <div v-if="player.color[2].isUnlockedUpgrade" class="color-upgrade-coll-button-blue" @click="collapse('color-upgrade-coll-button-blue', 'color-upgrade-coll-container-blue')">
+            <div v-if="player.unlocks.color[2].upgrade" class="color-upgrade-coll-button-blue" @click="collapse('color-upgrade-coll-button-blue', 'color-upgrade-coll-container-blue')">
 
             </div>
-            <div v-if="player.color[2].isUnlockedUpgrade" class="color-upgrade-coll-container-blue">
+            <div v-if="player.unlocks.color[2].upgrade" class="color-upgrade-coll-container-blue">
               <div class="color-effect-container">
                 <div class="color-effect-text">
                   Your highest amount of Blue (<span class="color-effect-blue">{{format(player.color[2].highest)}}</span>) multiplies all previous colors by x<span class="color-effect-blue">{{format(formula.colorEffect[2](), 2)}}</span>.<br>
@@ -301,9 +320,9 @@
             </div>
           </div>
         </div>
-        <!-- <div class="tab achievement-tab" style="display: none">
-          Achievements Placeholder
-        </div> -->
+        <div class="tab brightness-tab" style="display: none">
+          Brightness Placeholder
+        </div>
         <div class="tab stats-tab" style="display: none">
           <span>Total play time: {{formatDate(player.stats.playTime)}}</span>
         </div>

@@ -19,7 +19,7 @@ const formula = {
       },
       function (red){
         if (red === undefined) red = player.color[0].amount
-        if (red.equals(0)) red = new Decimal(1) // because of Math.log10(red)
+        if (red.lte(0)) red = new Decimal(1) // because of Math.log10(red)
 
         let base = new Decimal(1)
             base = Decimal.pow(10, Decimal.log10(red)/3-1)
@@ -39,7 +39,7 @@ const formula = {
       },
       function (green){
         if (green === undefined) green = player.color[1].amount
-        if (green.equals(0)) green = new Decimal(1) // because of Math.log10(green)
+        if (green.lte(0)) green = new Decimal(1) // because of Math.log10(green)
 
         let base = new Decimal(1)
             base = Decimal.pow(10, Decimal.log10(green)/3-1)
@@ -56,7 +56,21 @@ const formula = {
 
         return {base, multi, amount, speed}
       }
-    ]
+    ],
+    light(blue){
+      if (blue === undefined) blue = player.color[2].amount
+      if (blue.equals(0)) blue = new Decimal(1)
+
+      let base = new Decimal(1)
+          base = Decimal.pow(10, Decimal.log10(blue)/3-1)
+      if (blue.lt(1000)) base = new Decimal(0)
+
+      let multi = new Decimal(1)
+
+      let amount = Decimal.floor(base.times(multi))
+
+      return {base, multi, amount}
+    }
   },
   colorEffect:[
     function (){

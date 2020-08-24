@@ -31,14 +31,27 @@ button:hover{
 
 .currency-container {
   display: flex;
+  flex-direction: column;
   margin-bottom: 20px;
 }
 
-.red-currency, .green-currency, .blue-currency{
+.currency-container-top, .currency-container-bottom{
+  display: flex;
+  flex-direction: row;
+}
+
+.red-currency, .green-currency, .blue-currency, .light-currency{
   font-size: 20px;
   min-width: 200px;
   padding: 10px;
   text-align: left;
+}
+
+.brightness-prestige-button{
+  margin: 0 10px;
+  height: 50px;
+  min-width: 200px;
+  padding: 10px;
 }
 
 .red-currency{
@@ -53,6 +66,23 @@ button:hover{
   color: #5013FF;
 }
 
+.light-currency{
+  color: #FFFF00;
+}
+
+.brightness-prestige-button{
+  border: 2px solid #FFFF00;
+}
+
+.brightness-prestige-button--disabled{
+  background-color: #6B6B6B;
+  cursor: default;
+}
+
+.brightness-prestige-button--disabled:hover{
+  background-color: #6B6B6B;
+}
+
 .navigation-container{
   display: flex;
 }
@@ -64,6 +94,11 @@ button:hover{
   padding: 10px;
   text-align: center;
   cursor: pointer;
+}
+
+.navigation-button-brightness{
+  border: 2px solid #FFFF00;
+  color: #F2F367;
 }
 
 .color-producer {
@@ -201,6 +236,7 @@ button:hover{
   padding: 10px;
   justify-content: space-between;
 }
+
 
 .color-upgrade-button, .color-auto{
   display: flex;

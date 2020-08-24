@@ -9,6 +9,21 @@ var app = new Vue({
     options
   },
   methods:{
+    brighten(){
+      if (formula.gain.light().amount.lt(1)) return
+      if (this.player.options.confirmation.brighten){
+        if (this.player.unlocks.brightness.light){
+          if (!confirm("Brightening will reset all your colors and upgrades in exchange for lights. Proceed? (You can turn this confirmation off in options)")) return
+        }
+        else {
+          if (!confirm("Brightening will reset all your colors and upgrades in exchange for new currencies and mechanics. Proceed?")) return
+          this.player.unlocks.brightness.light = true
+          this.navigateTab('brightness-tab')
+        }
+      }
+      console.log("Hwy! This is a placeholder command which indicates that you have brightened!")
+      //placeholder for resetting stuff
+    },
     canBuyUpg(u){
       let cTier = Number(u.charAt(0))-1
       let info = this.colorUpgInfo[u]
@@ -29,9 +44,6 @@ var app = new Vue({
         this.player.colorUpg[u] = uTier + 1
       }
     },
-
-    //change this reeeeeee
-    //check out bootstrap later on
     collapse(s, i){
       let sels = document.getElementsByClassName(s)
       for (let el of sels){
