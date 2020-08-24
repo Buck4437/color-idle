@@ -36,7 +36,7 @@ const defaultPlayer = function (){
     options:{
       theme: 0
     },
-    version: 0,
+    version: 1,
     lastUpdateTick: Date.now()
   }
 }
