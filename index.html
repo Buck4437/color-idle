@@ -327,17 +327,19 @@
           <span>Total play time: {{formatDate(player.stats.playTime)}}</span>
         </div>
         <div class="tab options-tab" style="display: none">
-          <div>
-            <button class="options-button" @click="options.save()">Save</button>
-            <button class="options-button" @click="options.reset()">Reset</button>
-          </div>
-          <div>
-            <button class="options-button" @click="options.import()">Import</button>
-            <button class="options-button" @click="options.export()">Export</button>
-          </div>
-          <div>
-            <button class="options-button" @click="options.theme.switch()">Theme: {{options.theme.current()}}</button>
-          </div>
+            <div>
+              <button class="options-button" @click="options.save()">Save</button>
+              <button class="options-button" @click="options.reset()">Reset</button>
+              <button v-if="player.unlocks.brightness.light"
+                      class="options-button option-button-brightness" @click="options.confirmation.switch('brighten')">Brighten Confirmation: {{options.confirmation.current('brighten')}}</button>
+            </div>
+            <div>
+              <button class="options-button" @click="options.import()">Import</button>
+              <button class="options-button" @click="options.export()">Export</button>
+            </div>
+            <div>
+              <button class="options-button" @click="options.theme.switch()">Theme: {{options.theme.current()}}</button>
+            </div>
           <br>
           Game autosaves every 15 seconds
           <br>

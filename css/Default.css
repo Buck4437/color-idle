@@ -286,12 +286,21 @@ button:hover{
   background-color: #D1D1D1;
 }
 
+.options-container-file{
+  margin-right: 50px;
+}
+
 .options-tab button{
-  font-size: 20px;
+  font-size: 17px;
+  vertical-align: top;
 }
 
 .options-button{
   width: 170px;
   height: 70px;
   margin-bottom: 15px;
+}
+
+.option-button-brightness{
+  border: 2px solid #FFD100
 }

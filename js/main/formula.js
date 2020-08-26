@@ -7,12 +7,12 @@ const formula = {
         let multi = new Decimal(1)
                     .times(formula.colorEffect[1]())
                     .times(formula.colorEffect[2]())
-                    .times(player.colorUpg.hasOwnProperty("12") ? formula.cUpg["12"](player.colorUpg["12"]).effect : 1)
+                    .times(Object.prototype.hasOwnProperty.call(player.colorUpg , "12") ? formula.cUpg["12"](player.colorUpg["12"]).effect : 1)
 
         let amount = base.times(multi)
 
         let speed = new Decimal(1) //increase = faster, decrease = slower
-                    .times(player.colorUpg.hasOwnProperty("11") ? formula.cUpg["11"](player.colorUpg["11"]).effect : 1)
+                    .times(Object.prototype.hasOwnProperty.call(player.colorUpg , "11") ? formula.cUpg["11"](player.colorUpg["11"]).effect : 1)
                     .times(player.color[0].auto ? formula.cUpg["13"]().effect : 1)
 
         return {base, multi, amount, speed}
@@ -27,12 +27,12 @@ const formula = {
 
         let multi = new Decimal(1)
                     .times(formula.colorEffect[2]())
-                    .times(player.colorUpg.hasOwnProperty("22") ? formula.cUpg["22"](player.colorUpg["22"]).effect : 1)
+                    .times(Object.prototype.hasOwnProperty.call(player.colorUpg , "22") ? formula.cUpg["22"](player.colorUpg["22"]).effect : 1)
 
         let amount = base.times(multi)
 
         let speed = new Decimal(1)
-                    .times(player.colorUpg.hasOwnProperty("21") ? formula.cUpg["21"](player.colorUpg["21"]).effect : 1)
+                    .times(Object.prototype.hasOwnProperty.call(player.colorUpg , "21") ? formula.cUpg["21"](player.colorUpg["21"]).effect : 1)
                     .times(player.color[1].auto ? formula.cUpg["23"]().effect : 1)
 
         return {base, multi, amount, speed}
@@ -46,12 +46,12 @@ const formula = {
         if (green.lt(1000)) base = new Decimal(0)
 
         let multi = new Decimal(1)
-                    .times(player.colorUpg.hasOwnProperty("32") ? formula.cUpg["32"](player.colorUpg["32"]).effect : 1)
+                    .times(Object.prototype.hasOwnProperty.call(player.colorUpg , "32") ? formula.cUpg["32"](player.colorUpg["32"]).effect : 1)
 
         let amount = base.times(multi)
 
         let speed = new Decimal(1)
-                    .times(player.colorUpg.hasOwnProperty("31") ? formula.cUpg["31"](player.colorUpg["31"]).effect : 1)
+                    .times(Object.prototype.hasOwnProperty.call(player.colorUpg , "31") ? formula.cUpg["31"](player.colorUpg["31"]).effect : 1)
                     .times(player.color[2].auto ? formula.cUpg["34"]().effect : 1)
 
         return {base, multi, amount, speed}
@@ -108,7 +108,7 @@ const formula = {
       let cost = colorUpgInfo["13"].cost
 
       let effect = 0.50
-          effect += player.colorUpg.hasOwnProperty("33") ? formula.cUpg["33"](player.colorUpg["33"]).effect : 0
+          effect += Object.prototype.hasOwnProperty.call(player.colorUpg , "33") ? formula.cUpg["33"](player.colorUpg["33"]).effect : 0
 
       return {cost, effect}
     },

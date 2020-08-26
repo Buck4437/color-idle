@@ -53,6 +53,14 @@ const options = {
     current(){
       return themes[player.options.theme]
     }
+  },
+  confirmation: {
+    switch(name){
+      player.options.confirmation[name] = !player.options.confirmation[name]
+    },
+    current(name){
+      return player.options.confirmation[name] ? "On" : "Off"
+    }
   }
 }
 
@@ -77,7 +85,7 @@ function saveToDecimal(obj, def){
 
 function isValidSave(save){
   try {
-    let parse = JSON.parse(window.atob(save))
+    JSON.parse(window.atob(save))
     return true
   }
   catch (e){

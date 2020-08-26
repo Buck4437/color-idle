@@ -36,7 +36,7 @@ function formatDate(s, p){
     return (x - x % y)/y
   }
   let y = div(s, 31536000) //365 * 86400
-  if (y === NaN) return "unknown"
+  if (isNaN(y)) return "unknown"
   s -= 31536000 * y
   let d = div(s, 86400)
   s -= 86400 * d

@@ -1,0 +1,24 @@
+{
+  "name": "color-idle",
+  "version": "1.0.0",
+  "description": "An incremental based on gaining colors",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-plugin-vue": "^6.2.2"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Buck4437/color-idle.git"
+  },
+  "author": "Buck4437",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Buck4437/color-idle/issues"
+  },
+  "homepage": "https://github.com/Buck4437/color-idle#readme"
+}

@@ -4,6 +4,7 @@ var app = new Vue({
     dev,
     color,
     colorUpgInfo,
+    defaultPlayer,
     formula,
     player,
     options
@@ -21,8 +22,11 @@ var app = new Vue({
           this.navigateTab('brightness-tab')
         }
       }
-      console.log("Hwy! This is a placeholder command which indicates that you have brightened!")
-      //placeholder for resetting stuff
+      this.player.brightness.light = this.player.brightness.light.add(formula.gain.light().amount)
+      for (let i = 0; i <= 2; i++){
+        this.player.color[i] = this.defaultPlayer().color[i]
+      }
+      this.player.colorUpg = this.defaultPlayer().colorUpg
     },
     canBuyUpg(u){
       let cTier = Number(u.charAt(0))-1
