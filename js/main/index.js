@@ -2,7 +2,7 @@ var app = new Vue({
   el: "#app",
   data:{
     dev,
-    color,
+    brightnessUpgInfo,
     colorUpgInfo,
     defaultPlayer,
     formula,
@@ -13,13 +13,13 @@ var app = new Vue({
     brighten(){
       if (formula.gain.light().amount.lt(1)) return
       if (this.player.options.confirmation.brighten){
-        if (this.player.unlocks.brightness.light){
+        if (this.player.unlocks.brightness.isUnlocked){
           if (!confirm("Brightening will reset all your colors and upgrades in exchange for lights. Proceed? (You can turn this confirmation off in options)")) return
         }
         else {
           if (!confirm("Brightening will reset all your colors and upgrades in exchange for new currencies and mechanics. Proceed?")) return
-          this.player.unlocks.brightness.light = true
-          this.navigateTab('brightness-tab')
+          this.player.unlocks.brightness.isUnlocked = true
+          this.navigateTab('tab', 'brightness-tab')
         }
       }
       this.player.brightness.light = this.player.brightness.light.add(formula.gain.light().amount)
@@ -31,7 +31,7 @@ var app = new Vue({
     canBuyUpg(u){
       let cTier = Number(u.charAt(0))-1
       let info = this.colorUpgInfo[u]
-      let uTier = this.player.colorUpg[u]||0
+      let uTier = this.player.colorUpg[u]
       if (uTier >= info.cap) return "max"
       let cost = this.formula.cUpg[u](uTier).cost
       if (this.player.color[cTier].amount.gte(cost)){
@@ -41,7 +41,7 @@ var app = new Vue({
     },
     buyUpg(u){
       let cTier = Number(u.charAt(0))-1
-      let uTier = this.player.colorUpg[u]||0
+      let uTier = this.player.colorUpg[u]
       let cost = this.formula.cUpg[u](uTier).cost
       if (this.canBuyUpg(u) === true){
         this.player.color[cTier].amount = this.player.color[cTier].amount.minus(cost)
@@ -95,8 +95,8 @@ var app = new Vue({
     formatDate(seconds, pMode){
       return formatDate(seconds, pMode)
     },
-    navigateTab(name){
-      let tabs = document.getElementsByClassName("tab")
+    navigateTab(group, name){
+      let tabs = document.getElementsByClassName(group)
       for (let tab of tabs){
         tab.style = "display: none"
       }

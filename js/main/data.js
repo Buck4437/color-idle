@@ -1,11 +1,3 @@
-const color = {
-  //used to display color
-  normal: ["red", "green", "blue"],
-  noun: ["Red", "Green", "Blue"],
-  hex: ["#f00", "#0f0", "#00f"]
-}
-
-
 const themes = ['Light', 'Dark']
 
 const colorUpgInfo = {
@@ -69,3 +61,26 @@ const colorUpgInfo = {
     cost: 10
   },
 }
+
+const brightnessUpgInfo = [
+  {
+    id: "11",
+    pos: ["50%", "50px"],
+    name: "x2"
+  },
+  {
+    id: "21",
+    pos: ["20%", "250px"],
+    name: "T -> R"
+  },
+  {
+    id: "22",
+    pos: ["50%", "250px"],
+    name: "B -> R"
+  },
+  {
+    id: "23",
+    pos: ["80%", "250px"],
+    name: "Keep R"
+  }
+]

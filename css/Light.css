@@ -33,6 +33,7 @@ button:hover{
 
 .currency-container-top, .currency-container-bottom{
   display: flex;
+  justify-content: space-between;
   flex-direction: row;
 }
 
@@ -81,6 +82,7 @@ button:hover{
 
 .navigation-container{
   display: flex;
+  margin-bottom: 20px;
 }
 
 .navigation-button{
@@ -95,6 +97,15 @@ button:hover{
 .navigation-button-brightness{
   border: 2px solid #FFD100;
   color: #FFB700;
+}
+
+.navigation-button-subtab{
+  font-size: 15px;
+  min-width: 160px;
+  margin-right: 10px;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
 }
 
 .color-producer {
@@ -284,6 +295,11 @@ button:hover{
 
 .color-auto--auto:hover{
   background-color: #D1D1D1;
+}
+
+.brightness-upgrade-popup{
+  background-color: #E8F1F2;
+  border: 2px solid #E8F1F2;
 }
 
 .options-tab button{

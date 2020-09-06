@@ -23,9 +23,21 @@ const defaultPlayer = function (){
         highest: new Decimal(0)
       }
     ],
-    colorUpg: {},
-    brightness:{
-      light: new Decimal(0)
+    colorUpg: {
+      11: 0,
+      12: 0,
+      13: 0,
+      21: 0,
+      22: 0,
+      23: 0,
+      31: 0,
+      32: 0,
+      33: 0,
+      34: 0
+    },
+    brightness: {
+      light: new Decimal(0),
+      upg: {}
     },
     unlocks:{
       color:[
@@ -43,7 +55,7 @@ const defaultPlayer = function (){
         }
       ],
       brightness: {
-        light: false
+        isUnlocked: false
       }
     },
     stats:{

@@ -1,6 +1,10 @@
 function gameLoop(that, s){
   if (s === undefined){
     s = (Date.now() - that.player.lastUpdateTick)/1000
+    if (s < 0) {
+      that.player.lastUpdateTick = Date.now()
+      return //fuck time skipping
+    }
     //simple offline progress circuit
     if (s > 60){
       for (let i = 1; i <= 1000; i++){
@@ -10,6 +14,11 @@ function gameLoop(that, s){
     $(".game-container").css("display", "block")
     $(".offline-progress-container").css("display", "none")
   }
+  if (s < 0) {
+    that.player.lastUpdateTick = Date.now()
+    return //fuck time skipping
+  }
+  
   //resolve this mess soon
   for (let i=0; i <= that.player.color.length-1; i++){
     if (that.player.color[i].timer.gt(0)){

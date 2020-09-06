@@ -1,4 +1,6 @@
 body{
   font-family: 'Inconsolata', monospace;
   font-size: 15px;
+  max-width: 1000px;
+  margin: auto;
 }
