@@ -1,9 +1,10 @@
 <template lang="html">
   <div id="app">
     <div id="game-container" style="display: none">
-      <currency-container/>
+      <currency-container @switch-tab="selectTab"/>
       <navigation-container class="navigation-container" @select-button="selectTab"/>
-      <tab-color      v-show="selectedTab === 'color' || selectedTab === ''" :canGenerate="canGenerateColor()" @generate="generateColor"/>
+      <tab-color      v-show="selectedTab === 'color'" :canGenerate="canGenerateColor()" @generate="generateColor"/>
+      <tab-brightness v-show="selectedTab === 'brightness'"/>
       <tab-statistics v-show="selectedTab === 'stats'"  />
       <tab-options    v-show="selectedTab === 'options'"/>
     </div>
@@ -17,6 +18,7 @@
 import currencyContainer from './components/TopContainer.vue'
 import navigationContainer from './components/NavigationBarTop.vue'
 import tabColor from './components/TabColor.vue'
+import tabBrightness from './components/TabBrightness.vue'
 import tabStatistics from './components/TabStatistics.vue'
 import tabOptions from './components/TabOptions.vue'
 
@@ -24,13 +26,14 @@ export default {
   components: {
     currencyContainer,
     navigationContainer,
-    tabStatistics,
     tabColor,
+    tabBrightness,
+    tabStatistics,
     tabOptions
   },
   data(){
     return{
-      selectedTab: ""
+      selectedTab: "color"
     }
   },
   methods:{

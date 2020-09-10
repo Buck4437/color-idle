@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="navigation-container">
-    <button v-for="button in buttonActive" :key="button.id" @click="click(button.id)">
+    <button v-for="button in buttonActive" :key="button.id" @click="click(button.id)" class="nav-button">
       {{button.text}}
     </button>
   </div>
@@ -39,5 +39,13 @@ export default{
   display: flex;
   text-align: center;
   margin-bottom: 20px;
+}
+
+.nav-button{
+  font-size: 15px;
+  min-width: 160px;
+  margin-right: 10px;
+  text-align: center;
+  cursor: pointer;
 }
 </style>

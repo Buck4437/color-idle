@@ -1,6 +1,7 @@
 <template lang="html">
   <div class="navigation-container">
     <button @click="click('color')">Color</button>
+    <button @click="click('brightness')" class="brightness-navigation" v-if="player.unlocks.brightness.isUnlocked">Brightness</button>
     <button @click="click('stats')">Statistics</button>
     <button @click="click('options')">Options</button>
   </div>
@@ -36,5 +37,10 @@ export default{
   display: flex;
   text-align: center;
   margin-bottom: 20px;
+}
+
+.brightness-navigation{
+  color: var(--color-brightness);
+  border-color: var(--color-brightness);
 }
 </style>

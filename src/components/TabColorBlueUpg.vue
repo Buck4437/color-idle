@@ -22,12 +22,12 @@
         Cost: {{format.num(gameData.colorUpg["32"].cost(player))}} Blue
       </div>
     </button>
-    <button class="upgrade" @click="buyUpg('33')" :class="{'upgrade--disabled': canBuyUpg('32') === false, 'upgrade--max': canBuyUpg('32') === 'max'}">
+    <button class="upgrade" @click="buyUpg('33')" :class="{'upgrade--disabled': canBuyUpg('33') === false, 'upgrade--max': canBuyUpg('33') === 'max'}">
       <div>
         {{gameData.colorUpg["33"].desc}}
       </div>
       <div>
-        Effect: +{{format.num(gameData.color[2].multi(player), 2)}}%
+        Effect: +{{format.num(gameData.colorUpg["33"].effect(player)*100)}}%
       </div>
       <div v-if="!(this.canBuyUpg('33') == 'max')">
         Cost: {{format.num(gameData.colorUpg["33"].cost(player))}} Blue

@@ -13,7 +13,7 @@
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-eslint": "^4.5.5",
     "@vue/cli-service": "~4.5.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
@@ -32,6 +32,7 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
+    "ignorePatterns": ["break_infinity.min.js"],
     "rules": {}
   },
   "browserslist": [

@@ -26,4 +26,8 @@ export default{
 .Blue{
   color: var(--color-blue)
 }
+
+.Light{
+  color: var(--color-brightness)
+}
 </style>

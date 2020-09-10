@@ -2,7 +2,6 @@ import Decimal from '../lib/break_infinity.min.js'
 
 var gameData = {
   color: [
-    //these are placeholders, formula will be added later
     {
       base(){
         return new Decimal(1)
@@ -11,6 +10,7 @@ var gameData = {
         let multi = new Decimal(1)
                     .times(gameData.colorUpg["12"].effect(player))
                     .times(gameData.color[1].effect(player))
+                    .times(gameData.color[2].effect(player))
         return multi
       },
       gain(player){
@@ -35,7 +35,6 @@ var gameData = {
       multi(player){
         let multi = new Decimal(1)
                     .times(gameData.colorUpg["22"].effect(player))
-                   //placeholder
         return multi
       },
       gain(player){
@@ -66,7 +65,6 @@ var gameData = {
       multi(player){
         let multi = new Decimal(1)
                     .times(gameData.colorUpg["32"].effect(player))
-                   //placeholder
         return multi
       },
       gain(player){
@@ -215,7 +213,46 @@ var gameData = {
         return effect
       }
     }
-  }
+  },
+  light:{
+    base(player){
+      let blue = player.color[2].amount
+      if (blue.lte(0)) blue = new Decimal(1) // because of Math.log10(blue)
+
+      let base = Decimal.pow(10, Decimal.log10(blue)/Decimal.log10(1500)-1)
+      if (blue.lt(1500)) base = new Decimal(0)
+      return base
+    },
+    multi(){
+      let multi = new Decimal(1)
+      return multi
+    },
+    gain(player){
+      return Decimal.floor(this.base(player).times(this.multi(player))) //must be integer
+    },
+  },
+  brightnessUpg:[
+    {
+      id: "11",
+      pos: ["50%", "50px"],
+      name: "x2"
+    },
+    {
+      id: "21",
+      pos: ["20%", "250px"],
+      name: "T -> R"
+    },
+    {
+      id: "22",
+      pos: ["50%", "250px"],
+      name: "B -> R"
+    },
+    {
+      id: "23",
+      pos: ["80%", "250px"],
+      name: "Keep R"
+    }
+  ]
 }
 
 export default gameData

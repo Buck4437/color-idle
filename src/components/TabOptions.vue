@@ -3,6 +3,7 @@
     <div>
       <button class="options-button" @click="save">Save</button>
       <button class="options-button" @click="reset">Reset</button>
+      <button class="options-button" @click="toggleConfirmation('brighten')" v-if="player.unlocks.brightness.isUnlocked">Brighten Confirmation: {{player.options.confirmation.brighten ? "On" : "Off"}}</button>
     </div>
     <div>
       <button class="options-button" @click="importSave">Import</button>
@@ -99,6 +100,9 @@ export default {
     themeSwitch(){
       this.player.options.theme ++
       if (this.player.options.theme > this.theme.classNames.length - 1) this.player.options.theme = 0
+    },
+    toggleConfirmation(name){
+      this.player.options.confirmation[name] = !this.player.options.confirmation[name]
     }
   },
   mounted(){
