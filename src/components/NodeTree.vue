@@ -1,9 +1,10 @@
 <template lang="html">
   <div style="position: relative; width: 800px;">
-    <button v-for="node in nodes" class="nodes"
-                                  style="position: absolute; z-index: 1;" :key=node.id
-                                 :style="{'left': '100%'}">
-      <div>{{node.name}}</div>
+    <button v-for="node in nodes" :key="node.id" class="nodes" :style="{'left': (node.pos[0]*720)+'px', 'top': node.pos[1]+'px'}" @click="buyNode(node.id)">
+        <div>{{node.name}}</div>
+        <div class="tooltip">
+          <span class="tooltiptext">{{node.desc}}</span>
+        </div>
     </button>
     <canvas :id="id + '-node-tree-canvas'">
     </canvas>
@@ -17,6 +18,9 @@ export default {
     id: String
   },
   methods:{
+    buyNode(id){
+      console.log(`User clicked Node ${id}!`)
+    }
   },
   mounted(){
 
@@ -26,9 +30,42 @@ export default {
 
 <style lang="css" scoped>
 .nodes{
-  width: 100px;
-  height: 100px;
-  font-size: 20px;
+  width: 80px;
+  height: 80px;
+  font-size: 15px;
   border-radius: 50%;
+  position: absolute;
+}
+
+.tooltip {
+  visibility: hidden;
+  border: 2px solid var(--border-color);
+  background-color: var(--background-color);
+  color: var(--color);
+  text-align: center;
+  border-radius: 6px;
+  padding: 10px 10px;
+  width: 250px;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 2;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -125px;
+}
+
+.tooltip .tooltiptext::after {
+  content: " ";
+  position: absolute;
+  top: 100%; /* At the bottom of the tooltip */
+  left: 115px;
+  border-width: 10px;
+  border-style: solid;
+  border-color: var(--border-color) transparent transparent transparent;
+}
+
+.nodes:hover .tooltip {
+  visibility: visible;
 }
 </style>

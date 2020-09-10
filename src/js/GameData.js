@@ -234,23 +234,27 @@ var gameData = {
   brightnessUpg:[
     {
       id: "11",
-      pos: ["50%", "50px"],
-      name: "x2"
+      pos: [0.5, 100],
+      name: "x2",
+      desc: "x2 multiplier to all colors"
     },
     {
       id: "21",
-      pos: ["20%", "250px"],
-      name: "T -> R"
+      pos: [0.25, 300],
+      name: "T -> R",
+      desc: "placeholder"
     },
     {
       id: "22",
-      pos: ["50%", "250px"],
-      name: "B -> R"
+      pos: [0.5, 300],
+      name: "B -> R",
+      desc: "placeholder"
     },
     {
       id: "23",
-      pos: ["80%", "250px"],
-      name: "Keep R"
+      pos: [0.75, 300],
+      name: "Keep R",
+      desc: "placeholder"
     }
   ]
 }
