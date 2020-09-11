@@ -15,22 +15,16 @@ export default {
     nodeTree
   },
   methods:{
-    findNode(id){
-      for (let node of this.gameData.brightnessUpg){
-        if (node.id == id) return node
-      }
-      return
-    },
     buyUpgrade(id){
       if (this.player.brightness.brightnessUpg[id] >= 1) return
-      let parents = this.findNode(id).parents
+      let parents = this.gameData.brightnessUpgNode(id).parents
       if (parents !== undefined){
         for (let parent of parents){
           if (this.player.brightness.brightnessUpg[parent] < 1) return
         }
       }
-      if (this.player.brightness.light.lt(this.findNode(id).cost)) return
-      this.player.brightness.light = this.player.brightness.light.minus(this.findNode(id).cost)
+      if (this.player.brightness.light.lt(this.gameData.brightnessUpgNode(id).cost)) return
+      this.player.brightness.light = this.player.brightness.light.minus(this.gameData.brightnessUpgNode(id).cost)
       this.player.brightness.brightnessUpg[id] = 1
     }
   }

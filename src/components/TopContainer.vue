@@ -45,13 +45,33 @@ export default {
       }
       this.player.brightness.light = this.player.brightness.light.add(this.gameData.light.gain(this.player))
       this.player.stats.brightness.resets += 1
+      let keepUpgradeIDs = {
+        11: "22",
+        12: "24",
+        13: "23",
+        21: "32",
+        22: "34",
+        23: "33",
+        31: "",
+        32: "",
+        33: "",
+        34: ""
+      }
+      let keepAutoIDs = ["23", "33", ""]
       for (let i = 0; i <= 2; i++){
         for (let key of Object.keys(this.defaultPlayer().color[i])){
+          if (key == "auto"){
+            let keepAuto = keepAutoIDs[i]
+            if ((this.player.brightness.brightnessUpg[keepAuto]||0) >= 1) continue
+          }
           this.player.color[i][key] = this.defaultPlayer().color[i][key]
         }
       }
-      for (let key of Object.keys(this.defaultPlayer().colorUpg)){
-        this.player.colorUpg[key] = this.defaultPlayer().colorUpg[key]
+      for (let key of Object.keys(keepUpgradeIDs)){
+        let upgrade = keepUpgradeIDs[key]
+        if ((this.player.brightness.brightnessUpg[upgrade]||0) < 1){
+          this.player.colorUpg[key] = this.defaultPlayer().colorUpg[key]
+        }
       }
       if (this.player.stats.brightness.currentTime < this.player.stats.brightness.fastestTime){
         this.player.stats.brightness.fastestTime = this.player.stats.brightness.currentTime
