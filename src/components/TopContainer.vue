@@ -44,6 +44,7 @@ export default {
         }
       }
       this.player.brightness.light = this.player.brightness.light.add(this.gameData.light.gain(this.player))
+      this.player.stats.brightness.resets += 1
       for (let i = 0; i <= 2; i++){
         for (let key of Object.keys(this.defaultPlayer().color[i])){
           this.player.color[i][key] = this.defaultPlayer().color[i][key]
@@ -52,6 +53,10 @@ export default {
       for (let key of Object.keys(this.defaultPlayer().colorUpg)){
         this.player.colorUpg[key] = this.defaultPlayer().colorUpg[key]
       }
+      if (this.player.stats.brightness.currentTime < this.player.stats.brightness.fastestTime){
+        this.player.stats.brightness.fastestTime = this.player.stats.brightness.currentTime
+      }
+      this.player.stats.brightness.currentTime = 0
     },
   }
 }

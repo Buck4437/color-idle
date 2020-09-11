@@ -1,7 +1,7 @@
 <template lang="html">
   <div>
-    <div style="text-align: center">
-      Hover over the nodes to view their description, click on the nodes to buy the corresponding upgrade.
+    <div>
+      Hover over the nodes to view their descriptions, click on the nodes to buy the corresponding upgrades.
     </div>
     <node-tree class="node-tree" :nodes="gameData.brightnessUpg" :id="'brightness-Upg'"/>
   </div>

@@ -3,7 +3,7 @@
     <button v-for="node in nodes" :key="node.id" class="nodes" :style="{'left': (node.pos[0]*720)+'px', 'top': node.pos[1]+'px'}" @click="buyNode(node.id)">
         <div>{{node.name}}</div>
         <div class="tooltip">
-          <span class="tooltiptext">{{node.desc}}</span>
+          <div class="tooltiptext" v-html="node.desc(player)"></div>
         </div>
     </button>
     <canvas :id="id + '-node-tree-canvas'">

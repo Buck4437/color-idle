@@ -1,4 +1,5 @@
 import Decimal from '../lib/break_infinity.min.js'
+import format from './Format.js'
 
 var gameData = {
   color: [
@@ -236,26 +237,46 @@ var gameData = {
       id: "11",
       pos: [0.5, 100],
       name: "x2",
-      desc: "x2 multiplier to all colors"
+      desc(player){
+        let cost = `Cost : ${this.cost} Light`
+        if (player.brightness.brightnessUpg["11"] >= 1) cost = ""
+        return `x2 multiplier to all colors<br><br>
+                ${cost}`
+      },
+      cost: 1,
+      effect(){
+        return new Decimal(2)
+      }
     },
     {
       id: "21",
-      pos: [0.25, 300],
+      pos: [0.25, 250],
       name: "T -> R",
-      desc: "placeholder"
+      desc(player){
+        let cost = `Cost : ${this.cost} Light`
+        if (player.brightness.brightnessUpg["11"] >= 1) cost = ""
+        return `Multiplier to Red based on time spent in current brighten<br><br>
+                Currently: x${format.num(this.effect(player), 2)}<br><br>
+                ${cost}`
+      },
+      effect(player){
+        return Math.log10(player.stats.brightness.currentTime) + 1
+      },
+      cost: 1,
+      parents: ["11"]
     },
-    {
-      id: "22",
-      pos: [0.5, 300],
-      name: "B -> R",
-      desc: "placeholder"
-    },
-    {
-      id: "23",
-      pos: [0.75, 300],
-      name: "Keep R",
-      desc: "placeholder"
-    }
+    // {
+    //   id: "22",
+    //   pos: [0.5, 250],
+    //   name: "B -> R",
+    //   desc: "placeholder"
+    // },
+    // {
+    //   id: "23",
+    //   pos: [0.75, 250],
+    //   name: "Keep R",
+    //   desc: "placeholder"
+    // }
   ]
 }
 

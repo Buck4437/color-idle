@@ -59,6 +59,8 @@ function gameLoop(that, s){
   }
 
   that.player.stats.playTime += s
+  that.player.stats.brightness.currentTime += s
+
 
   that.player.lastUpdateTick = Date.now()
 }
