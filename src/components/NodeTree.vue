@@ -28,7 +28,7 @@ export default {
   },
   methods:{
     buyNode(id){
-      console.log(`User clicked Node ${id}!`)
+      this.$emit('select-node', id)
     },
     findNode(id){
       for (let node of this.nodes){

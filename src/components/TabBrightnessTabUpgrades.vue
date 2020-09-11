@@ -3,7 +3,7 @@
     <div>
       Hover over the nodes to view their descriptions, click on the nodes to buy the corresponding upgrades.
     </div>
-    <node-tree class="node-tree" :nodes="gameData.brightnessUpg" :id="'brightness-Upg'"/>
+    <node-tree class="node-tree" :nodes="gameData.brightnessUpg" :id="'brightness-Upg'" @select-node="buyUpgrade"/>
   </div>
 </template>
 
@@ -13,6 +13,26 @@ import nodeTree from './NodeTree.vue'
 export default {
   components: {
     nodeTree
+  },
+  methods:{
+    findNode(id){
+      for (let node of this.gameData.brightnessUpg){
+        if (node.id == id) return node
+      }
+      return
+    },
+    buyUpgrade(id){
+      if (this.player.brightness.brightnessUpg[id] >= 1) return
+      let parents = this.findNode(id).parents
+      if (parents !== undefined){
+        for (let parent of parents){
+          if (this.player.brightness.brightnessUpg[parent] < 1) return
+        }
+      }
+      if (this.player.brightness.light.lt(this.findNode(id).cost)) return
+      this.player.brightness.light = this.player.brightness.light.minus(this.findNode(id).cost)
+      this.player.brightness.brightnessUpg[id] = 1
+    }
   }
 }
 </script>

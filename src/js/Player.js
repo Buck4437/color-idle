@@ -43,7 +43,9 @@ export default function(){
         11: 0,
         21: 0,
         22: 0,
-        23: 0
+        23: 0,
+        24: 0,
+        25: 0
       }
     },
     unlocks:{

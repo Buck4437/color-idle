@@ -5,7 +5,7 @@
     </div>
     <div class="stats-con" v-if="player.unlocks.brightness.isUnlocked">
       <div class="stats stats-brightness">Number of times brightened: {{format.num(player.stats.brightness.resets)}}</div>
-      <div class="stats stats-brightness">Time spent on current brighten: {{format.date(player.stats.brightness.currentTime, true)}}</div>
+      <div class="stats stats-brightness">Time spent in current brighten: {{format.date(player.stats.brightness.currentTime, true)}}</div>
       <div class="stats stats-brightness">Fastest brighten: {{format.date(player.stats.brightness.fastestTime, true)}}</div>
     </div>
   </div>
