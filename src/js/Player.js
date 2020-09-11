@@ -39,7 +39,12 @@ export default function(){
     },
     brightness: {
       light: new Decimal(0),
-      brightnessUpg: {}
+      brightnessUpg: {
+        11: 0,
+        21: 0,
+        22: 0,
+        23: 0
+      }
     },
     unlocks:{
       color:[

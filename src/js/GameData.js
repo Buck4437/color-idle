@@ -232,26 +232,41 @@ var gameData = {
       return Decimal.floor(this.base(player).times(this.multi(player))) //must be integer
     },
   },
+  brightnessUpgState(that, player){
+    if (player.brightness.brightnessUpg[that.id] >= 1) return "bought"
+    if (that.parents !== undefined){
+      for (let parent of that.parents){
+        if (player.brightness.brightnessUpg[parent] < 1) return "locked"
+      }
+    }
+    if (player.brightness.light.lt(that.cost)) return "disabled"
+    return "default"
+  },
   brightnessUpg:[
     {
       id: "11",
       pos: [0.5, 100],
       name: "x2",
+      cost: new Decimal(1),
       desc(player){
         let cost = `Cost : ${this.cost} Light`
         if (player.brightness.brightnessUpg["11"] >= 1) cost = ""
         return `x2 multiplier to all colors<br><br>
                 ${cost}`
       },
-      cost: 1,
       effect(){
         return new Decimal(2)
+      },
+      state(player){
+        return gameData.brightnessUpgState(this, player)
       }
     },
     {
       id: "21",
-      pos: [0.25, 250],
+      pos: [0.3, 250],
       name: "T -> R",
+      cost: new Decimal(1),
+      parents: ["11"],
       desc(player){
         let cost = `Cost : ${this.cost} Light`
         if (player.brightness.brightnessUpg["11"] >= 1) cost = ""
@@ -262,21 +277,50 @@ var gameData = {
       effect(player){
         return Math.log10(player.stats.brightness.currentTime) + 1
       },
-      cost: 1,
-      parents: ["11"]
+      state(player){
+        return gameData.brightnessUpgState(this, player)
+      }
     },
-    // {
-    //   id: "22",
-    //   pos: [0.5, 250],
-    //   name: "B -> R",
-    //   desc: "placeholder"
-    // },
-    // {
-    //   id: "23",
-    //   pos: [0.75, 250],
-    //   name: "Keep R",
-    //   desc: "placeholder"
-    // }
+    {
+      id: "22",
+      pos: [0.5, 250],
+      name: "B -> R",
+      cost: new Decimal(1),
+      parents: ["11"],
+      desc(player){
+        let cost = `Cost : ${this.cost} Light`
+        if (player.brightness.brightnessUpg["11"] >= 1) cost = ""
+        return `Placeholder<br><br>
+                Currently: x${format.num(this.effect(player), 2)}<br><br>
+                ${cost}`
+      },
+      effect(){
+        return 1
+      },
+      state(player){
+        return gameData.brightnessUpgState(this, player)
+      }
+    },
+    {
+      id: "23",
+      pos: [0.7, 250],
+      name: "Keep R",
+      cost: new Decimal(100),
+      parents: ["11"],
+      desc(player){
+        let cost = `Cost : ${this.cost} Light`
+        if (player.brightness.brightnessUpg["11"] >= 1) cost = ""
+        return `Placeholder<br><br>
+                Currently: x${format.num(this.effect(player), 2)}<br><br>
+                ${cost}`
+      },
+      effect(){
+        return 1
+      },
+      state(player){
+        return gameData.brightnessUpgState(this, player)
+      }
+    }
   ]
 }
 
