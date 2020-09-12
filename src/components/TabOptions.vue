@@ -100,6 +100,7 @@ export default {
     themeSwitch(){
       this.player.options.theme ++
       if (this.player.options.theme > this.theme.classNames.length - 1) this.player.options.theme = 0
+      this.render()
     },
     toggleConfirmation(name){
       this.player.options.confirmation[name] = !this.player.options.confirmation[name]

@@ -7,6 +7,7 @@ import gameData from './js/GameData.js'
 import gameLoop from './js/GameLoop.js'
 import Decimal from './lib/break_infinity.min.js'
 import saveToDecimal from './js/SaveToDecimal.js'
+import drawTree from './js/Canvas.js'
 
 var player = defaultPlayer()
 let save = JSON.parse(localStorage.getItem("colorGameRemakeSave"))
@@ -23,7 +24,10 @@ Vue.mixin({
       defaultPlayer,
       gameData,
       gameLoop,
-      Decimal
+      Decimal,
+      render(){
+        drawTree('brightnessUpg-canvas', this.gameData.brightnessUpg, this.player)
+      }
     }
   }
 })

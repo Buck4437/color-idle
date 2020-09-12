@@ -6,7 +6,7 @@
           <div class="tooltiptext" v-html="node.desc(player)"></div>
         </div>
     </button>
-    <canvas :id="id + '-node-tree-canvas'" width="800" :height="canvasHeight" style="z-layer: -1">
+    <canvas id='brightnessUpg-canvas' width="800" :height="canvasHeight" style="z-layer: -1">
     </canvas>
   </div>
 </template>
@@ -15,7 +15,6 @@
 export default {
   props:{
     nodes: Array,
-    id: String
   },
   computed:{
     canvasHeight(){
@@ -38,26 +37,7 @@ export default {
     }
   },
   mounted(){
-    let canvas = document.getElementById(this.id + '-node-tree-canvas')
-    if (canvas.getContext) {
-      var ctx = canvas.getContext('2d');
-      ctx.strokeStyle = '#d9d9d9'
-      for (let node of this.nodes){
-        if (node.parents !== undefined){ //parents exists
-          for (let parent of node.parents){
-            if (this.findNode(parent) !== undefined){ //node
-              let coor = this.findNode(parent).pos
-              ctx.lineWidth = 10;
-
-              ctx.beginPath();
-              ctx.moveTo(coor[0]*720+40, coor[1]+40);
-              ctx.lineTo(node.pos[0]*720+40, node.pos[1]+40);
-              ctx.stroke();
-            }
-          }
-        }
-      }
-    }
+    this.render()
   },
 }
 </script>
