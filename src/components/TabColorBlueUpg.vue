@@ -123,15 +123,8 @@ export default {
   border-color: var(--border-color-disabled);
 }
 
-.auto:hover{
-  background-color: var(--border-color-enabled--hover);
-}
-
 .auto--auto{
   border-color: var(--border-color-enabled);
 }
 
-.auto--auto:hover{
-  background-color: var(--border-color-enabled--hover);
-}
 </style>

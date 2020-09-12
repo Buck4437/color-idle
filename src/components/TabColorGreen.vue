@@ -56,6 +56,10 @@ export default {
   transition-duration: 0.2s;
 }
 
+.coll-button-green:hover{
+  background-color: var(--background-color-enabled--hover);
+}
+
 .coll-button-green:after{
   float: right;
   content: "\25bc"; /* unicode char for down arrow */

@@ -15,7 +15,7 @@
             Brighten.
           </div>
           <div v-if="player.unlocks.brightness.isUnlocked">
-            + {{format.num(gameData.light.gain(player))}} Lights
+            + {{format.num(gameData.light.gain(player))}} Light
           </div>
         </button>
       </div>
