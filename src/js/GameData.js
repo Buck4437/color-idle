@@ -84,6 +84,8 @@ var gameData = {
         let multi = new Decimal(1)
                     .times(gameData.colorUpg["32"].effect(player))
                     .times(player.brightness.brightnessUpg["11"] ? gameData.brightnessUpgNode("11").effect(player) : 1)
+                    .times(player.brightness.brightnessUpg["41"] ? gameData.brightnessUpgNode("41").effect(player) : 1)
+                    .times(player.brightness.brightnessUpg["43"] ? gameData.brightnessUpgNode("43").effect(player) : 1)
         return multi
       },
       gain(player){
@@ -263,7 +265,7 @@ var gameData = {
       name: "x2",
       cost: new Decimal(1),
       desc(player){
-        let cost = `<br><br> Cost : ${this.cost} Light`
+        let cost = `<br><br> Cost: ${this.cost} Light`
         if (player.brightness.brightnessUpg[this.id] >= 1) cost = ""
         return `x2 multiplier to all colors
                 ${cost}`
@@ -282,7 +284,7 @@ var gameData = {
       cost: new Decimal(1),
       parents: ["11"],
       desc(player){
-        let cost = `<br><br> Cost : ${this.cost} Light`
+        let cost = `<br><br> Cost: ${this.cost} Light`
         if (player.brightness.brightnessUpg[this.id] >= 1) cost = ""
         return `Multiplier to Red based on time spent in current brighten<br><br>
                 Currently: x${format.num(this.effect(player), 2)}
@@ -302,7 +304,7 @@ var gameData = {
       cost: new Decimal(1),
       parents: ["23"],
       desc(player){
-        let cost = `<br><br> Cost : ${this.cost} Light`
+        let cost = `<br><br> Cost: ${this.cost} Light`
         if (player.brightness.brightnessUpg[this.id] >= 1) cost = ""
         return `Keep Red production time upgrade on prestige
                 ${cost}`
@@ -321,7 +323,7 @@ var gameData = {
       cost: new Decimal(1),
       parents: ["11"],
       desc(player){
-        let cost = `<br><br> Cost : ${this.cost} Light`
+        let cost = `<br><br> Cost: ${this.cost} Light`
         if (player.brightness.brightnessUpg[this.id] >= 1) cost = ""
         return `Keep Red automation mode upgrade on prestige
                 ${cost}`
@@ -340,7 +342,7 @@ var gameData = {
       cost: new Decimal(1),
       parents: ["23"],
       desc(player){
-        let cost = `<br><br>Cost : ${this.cost} Light`
+        let cost = `<br><br>Cost: ${this.cost} Light`
         if (player.brightness.brightnessUpg[this.id] >= 1) cost = ""
         return `Keep Red multiplier upgrade on prestige
                 ${cost}`
@@ -359,7 +361,7 @@ var gameData = {
       cost: new Decimal(1),
       parents: ["11"],
       desc(player){
-        let cost = `<br><br>Cost : ${this.cost} Light`
+        let cost = `<br><br>Cost: ${this.cost} Light`
         if (player.brightness.brightnessUpg[this.id] >= 1) cost = ""
         return `Multiplier to Red based on number of times brightened<br><br>
                 Currently: x${format.num(this.effect(player), 2)}
@@ -379,7 +381,7 @@ var gameData = {
       cost: new Decimal(1),
       parents: ["21"],
       desc(player){
-        let cost = `<br><br> Cost : ${this.cost} Light`
+        let cost = `<br><br> Cost: ${this.cost} Light`
         if (player.brightness.brightnessUpg[this.id] >= 1) cost = ""
         return `Multiplier to Green based on time spent in current brighten<br><br>
                 Currently: x${format.num(this.effect(player), 2)}
@@ -399,7 +401,7 @@ var gameData = {
       cost: new Decimal(1),
       parents: ["22", "33"],
       desc(player){
-        let cost = `<br><br> Cost : ${this.cost} Light`
+        let cost = `<br><br> Cost: ${this.cost} Light`
         if (player.brightness.brightnessUpg[this.id] >= 1) cost = ""
         return `Keep Green production time upgrade on prestige
                 ${cost}`
@@ -418,7 +420,7 @@ var gameData = {
       cost: new Decimal(1),
       parents: ["23"],
       desc(player){
-        let cost = `<br><br> Cost : ${this.cost} Light`
+        let cost = `<br><br> Cost: ${this.cost} Light`
         if (player.brightness.brightnessUpg[this.id] >= 1) cost = ""
         return `Keep Green automation mode upgrade on prestige
                 ${cost}`
@@ -437,7 +439,7 @@ var gameData = {
       cost: new Decimal(1),
       parents: ["24", "33"],
       desc(player){
-        let cost = `<br><br>Cost : ${this.cost} Light`
+        let cost = `<br><br>Cost: ${this.cost} Light`
         if (player.brightness.brightnessUpg[this.id] >= 1) cost = ""
         return `Keep Green multiplier upgrade on prestige
                 ${cost}`
@@ -456,7 +458,7 @@ var gameData = {
       cost: new Decimal(1),
       parents: ["25"],
       desc(player){
-        let cost = `<br><br>Cost : ${this.cost} Light`
+        let cost = `<br><br>Cost: ${this.cost} Light`
         if (player.brightness.brightnessUpg[this.id] >= 1) cost = ""
         return `Multiplier to Green based on number of times brightened<br><br>
                 Currently: x${format.num(this.effect(player), 2)}
@@ -464,6 +466,122 @@ var gameData = {
       },
       effect(player){
         return (player.stats.brightness.resets)**0.5 + 1
+      },
+      state(player){
+        return brightnessUpgState(this, player)
+      }
+    },
+    {
+      id: "41",
+      pos: [0.1, 550],
+      name: "T -> B",
+      cost: new Decimal(1),
+      parents: ["31"],
+      desc(player){
+        let cost = `<br><br> Cost: ${this.cost} Light`
+        if (player.brightness.brightnessUpg[this.id] >= 1) cost = ""
+        return `Multiplier to Blue based on time spent in current brighten<br><br>
+                Currently: x${format.num(this.effect(player), 2)}
+                ${cost}`
+      },
+      effect(player){
+        return Math.log10(player.stats.brightness.currentTime + 1)/1.5 + 1
+      },
+      state(player){
+        return brightnessUpgState(this, player)
+      }
+    },
+    {
+      id: "42",
+      pos: [0.5, 550],
+      name: "Keep BA",
+      cost: new Decimal(1),
+      parents: ["33"],
+      desc(player){
+        let cost = `<br><br> Cost: ${this.cost} Light`
+        if (player.brightness.brightnessUpg[this.id] >= 1) cost = ""
+        return `Keep Blue automation mode upgrade on prestige
+                ${cost}`
+      },
+      effect(){
+        return new Decimal(1)
+      },
+      state(player){
+        return brightnessUpgState(this, player)
+      }
+    },
+    {
+      id: "43",
+      pos: [0.9, 550],
+      name: "Br -> B",
+      cost: new Decimal(1),
+      parents: ["35"],
+      desc(player){
+        let cost = `<br><br>Cost: ${this.cost} Light`
+        if (player.brightness.brightnessUpg[this.id] >= 1) cost = ""
+        return `Multiplier to Blue based on number of times brightened<br><br>
+                Currently: x${format.num(this.effect(player), 2)}
+                ${cost}`
+      },
+      effect(player){
+        return (player.stats.brightness.resets)**0.5 + 1
+      },
+      state(player){
+        return brightnessUpgState(this, player)
+      }
+    },
+    {
+      id: "51",
+      pos: [0.3, 700],
+      name: "Keep BP",
+      cost: new Decimal(1),
+      parents: ["32", "42"],
+      desc(player){
+        let cost = `<br><br> Cost: ${this.cost} Light`
+        if (player.brightness.brightnessUpg[this.id] >= 1) cost = ""
+        return `Keep Blue production time upgrade on prestige
+                ${cost}`
+      },
+      effect(){
+        return new Decimal(1)
+      },
+      state(player){
+        return brightnessUpgState(this, player)
+      }
+    },
+    {
+      id: "52",
+      pos: [0.5, 700],
+      name: "Keep RAE",
+      cost: new Decimal(1),
+      parents: ["42"],
+      desc(player){
+        let cost = `<br><br> Cost: ${this.cost} Light`
+        if (player.brightness.brightnessUpg[this.id] >= 1) cost = ""
+        return `Keep Red auto efficiency increase upgrade on prestige
+                ${cost}`
+      },
+      effect(){
+        return new Decimal(1)
+      },
+      state(player){
+        return brightnessUpgState(this, player)
+      }
+    },
+    {
+      id: "53",
+      pos: [0.7, 700],
+      name: "Keep BM",
+      cost: new Decimal(1),
+      parents: ["34", "42"],
+      desc(player){
+        let cost = `<br><br>Cost: ${this.cost} Light`
+        if (player.brightness.brightnessUpg[this.id] >= 1) cost = ""
+        return `Keep Blue multiplier upgrade on prestige
+                ${cost}`
+      },
+      effect(){
+        return new Decimal(1)
       },
       state(player){
         return brightnessUpgState(this, player)

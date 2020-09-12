@@ -52,12 +52,12 @@ export default {
         21: "32",
         22: "34",
         23: "33",
-        31: "",
-        32: "",
-        33: "",
-        34: ""
+        31: "51",
+        32: "53",
+        33: "52",
+        34: "42"
       }
-      let keepAutoIDs = ["23", "33", ""]
+      let keepAutoIDs = ["23", "33", "42"]
       for (let i = 0; i <= 2; i++){
         for (let key of Object.keys(this.defaultPlayer().color[i])){
           if (key == "auto"){
