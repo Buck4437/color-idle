@@ -368,7 +368,7 @@ var gameData = {
                 ${cost}`
       },
       effect(player){
-        return (player.stats.brightness.resets)**0.4 + 1
+        return (player.stats.brightness.resets + 1)**0.5
       },
       state(player){
         return brightnessUpgState(this, player)
@@ -465,7 +465,7 @@ var gameData = {
                 ${cost}`
       },
       effect(player){
-        return (player.stats.brightness.resets)**0.4 + 1
+        return (player.stats.brightness.resets + 1)**0.5
       },
       state(player){
         return brightnessUpgState(this, player)
@@ -524,7 +524,7 @@ var gameData = {
                 ${cost}`
       },
       effect(player){
-        return (player.stats.brightness.resets)**0.4 + 1
+        return (player.stats.brightness.resets + 1)**0.5
       },
       state(player){
         return brightnessUpgState(this, player)

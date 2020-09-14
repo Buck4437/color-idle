@@ -15,7 +15,7 @@ function drawNodeBranches(id, node, nodes, player){
   for (let parentID of node.parents){
     if (findNode(parentID, nodes) === undefined) continue  //parent doesn't exist
     let parent = findNode(parentID, nodes)
-    drawBranch(id, nodePos(id, node), nodePos(id, parent), player)
+    drawBranch(id, nodePos(id, node), nodePos(id, parent), player, node)
   }
 }
 
@@ -32,32 +32,31 @@ function nodePos(canvasID, node){
   }
 }
 
-function drawBranch(id, pos1, pos2, player){
+function drawBranch(id, pos1, pos2, player, node){
   let canvas = document.getElementById(id)
   let ctx = canvas.getContext('2d');
 
-  ctx.strokeStyle = branchColor(player)
+  ctx.strokeStyle = branchColor(player, node)
   ctx.lineWidth = 10;
 
   ctx.beginPath();
   ctx.moveTo(pos1[0], pos1[1]);
   ctx.lineTo(pos2[0], pos2[1]);
   ctx.stroke();
-  //
-  // console.log(`Line drawn from ${pos1[0]}, ${pos1[1]} to ${pos2[0]}, ${pos2[1]}`)
-
-  // ctx.beginPath();
-  // ctx.moveTo(11, 11);
-  // ctx.lineTo(400, 400);
-  // ctx.stroke();
 }
 
-function branchColor(player){
+function branchColor(player, node){
   //refer to color palette
   if (player.options.theme == 0){
+    if (player.brightness.brightnessUpg[node.id] < 1){
+      return '#7B7B7B'
+    }
     return '#000000'
   }
   if (player.options.theme == 1) {
+    if (player.brightness.brightnessUpg[node.id] < 1){
+      return '#959595'
+    }
     return '#D9D9D9'
   }
 }

@@ -74,12 +74,12 @@ export default {
 }
 
 .nodes--bought{
-  border-color: var(--border-color-enabled);
-  background-color: var(--background-color);
+  border-color: var(--border-color-max);
+  background-color: var(--background-color-max);
 }
 
 .nodes--bought:hover{
-  background-color: var(--background-color);
+  background-color: var(--background-color-max);
 }
 
 .tooltip {
