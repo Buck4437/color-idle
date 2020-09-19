@@ -54,6 +54,7 @@ export default {
 .nodes--locked{
   border-color: var(--border-color-locked);
   background-color: var(--background-color);
+  cursor: default;
 }
 
 .nodes--locked .text{
@@ -67,6 +68,7 @@ export default {
 .nodes--disabled{
   border-color: var(--border-color-disabled);
   background-color: var(--background-color-disabled);
+  cursor: default;
 }
 
 .nodes--disabled:hover{
@@ -76,6 +78,7 @@ export default {
 .nodes--bought{
   border-color: var(--border-color-max);
   background-color: var(--background-color-max);
+  cursor: default;
 }
 
 .nodes--bought:hover{

@@ -27,7 +27,7 @@ function gameLoop(that, s){
     if (that.player.color[i].timer.gt(0)){
       that.player.color[i].timer = that.player.color[i].timer.minus(gameData.color[i].speed(that.player).times(s))
       if (that.player.color[i].timer.lte(0)){
-        that.player.color[i].amount = that.player.color[i].amount.plus(that.player.color[i].gainOnReset)
+        that.player.color[i].amount = that.player.color[i].amount.plus(that.player.color[i].gainOnReset.times(that.player.color[i].timer.abs().floor().plus(1))) //to make production dynamic when production time is low enough
         that.player.color[i].timer = new Decimal(0)
       }
     }

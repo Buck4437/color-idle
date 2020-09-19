@@ -41,6 +41,7 @@ export default function(){
       light: new Decimal(0),
       brightnessUpg: {
         11: 0,
+        12: 0,
         21: 0,
         22: 0,
         23: 0,

@@ -5,7 +5,7 @@
         {{gameData.colorUpg["31"].desc}}
       </div>
       <div>
-        Production Time: {{format.num(1/gameData.color[2].speed(player), 2)}}s
+        Production Time: {{gameData.color[2].speed(player).gt(100) ? `1/${format.num(gameData.color[2].speed(player))}`: format.num(1/gameData.color[2].speed(player), 2)}}s
       </div>
       <div v-if="!(this.canBuyUpg('31') == 'max')">
         Cost: {{format.num(gameData.colorUpg["31"].cost(player))}} Blue
