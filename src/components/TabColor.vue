@@ -1,9 +1,10 @@
 <template lang="html">
   <div>
-    <div >
-      <color-red                                        class="color-producer" :width="progressWidth[0]" :canGenerate="canGenerate[0]" @generate="generate"/>
-      <color-green v-if="player.unlocks.color[1].color" class="color-producer" :width="progressWidth[1]" :canGenerate="canGenerate[1]" @generate="generate"/>
-      <color-blue  v-if="player.unlocks.color[2].color" class="color-producer" :width="progressWidth[2]" :canGenerate="canGenerate[2]" @generate="generate"/>
+    <div>
+      <div v-if="player.unlocks.colorScaling"> Your excess amount of blue divides all your color production by x{{format.num(gameData.colorScaling.effect(player), 2)}} !<br><br></div>
+      <color-red                                        class="red-producer" :width="progressWidth[0]" :canGenerate="canGenerate[0]" @generate="generate"/>
+      <color-green v-if="player.unlocks.color[1].color" class="green-producer" :width="progressWidth[1]" :canGenerate="canGenerate[1]" @generate="generate"/>
+      <color-blue  v-if="player.unlocks.color[2].color" class="blue-producer" :width="progressWidth[2]" :canGenerate="canGenerate[2]" @generate="generate"/>
     </div>
   </div>
 </template>
@@ -41,9 +42,10 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.color-producer {
+.red-producer, .green-producer, .blue-producer{
   width: 800px;
   border: 2px solid;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 }
+
 </style>

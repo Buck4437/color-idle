@@ -39,12 +39,17 @@ export default {
         }
         else {
           if (!confirm("Brightening will reset all your colors and upgrades in exchange for new currencies and mechanics. Proceed?")) return
+          this.player.stats.brightness.currentTime = this.player.stats.playTime //first brighten
           this.player.unlocks.brightness.isUnlocked = true
           this.$emit('switch-tab', 'brightness')
         }
       }
       this.player.brightness.light = this.player.brightness.light.add(this.gameData.light.gain(this.player))
       this.player.stats.brightness.resets += 1
+      if (this.player.stats.brightness.currentTime < this.player.stats.brightness.fastestTime){
+        this.player.stats.brightness.fastestTime = this.player.stats.brightness.currentTime
+      }
+      this.player.stats.brightness.currentTime = 0
       let keepUpgradeIDs = {
         11: "22",
         12: "24",
@@ -52,12 +57,12 @@ export default {
         21: "32",
         22: "34",
         23: "33",
-        31: "51",
-        32: "53",
-        33: "52",
-        34: "42"
+        31: "42",
+        32: "45",
+        33: "44",
+        34: "43"
       }
-      let keepAutoIDs = ["23", "33", "42"]
+      let keepAutoIDs = ["23", "33", "43"]
       for (let i = 0; i <= 2; i++){
         for (let key of Object.keys(this.defaultPlayer().color[i])){
           if (key == "auto"){
@@ -73,10 +78,6 @@ export default {
           this.player.colorUpg[key] = this.defaultPlayer().colorUpg[key]
         }
       }
-      if (this.player.stats.brightness.currentTime < this.player.stats.brightness.fastestTime){
-        this.player.stats.brightness.fastestTime = this.player.stats.brightness.currentTime
-      }
-      this.player.stats.brightness.currentTime = 0
     },
   }
 }

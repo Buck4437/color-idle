@@ -55,6 +55,9 @@ export default function(){
         41: 0,
         42: 0,
         43: 0,
+        44: 0,
+        45: 0,
+        46: 0,
         51: 0,
         52: 0,
         53: 0
@@ -75,6 +78,7 @@ export default function(){
           upgrade: false
         }
       ],
+      colorScaling: false,
       brightness: {
         isUnlocked: false
       }

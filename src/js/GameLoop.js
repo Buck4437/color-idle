@@ -39,7 +39,7 @@ function gameLoop(that, s){
     }
   }
 
-  //unlock color stuff
+  //unlock stuff
   for (let i = 2; i >= 0; i--){
     if(that.player.color[i-1] !== undefined){
       if (that.player.color[i-1].amount.gte(1000)){
@@ -51,11 +51,14 @@ function gameLoop(that, s){
       that.player.unlocks.color[i].upgrade = true
     }
     if(that.player.color[i+1] !== undefined){
-      if (that.player.color[i+1].isUnlocked){
+      if (that.player.unlocks.color[i+1].color){
         that.player.unlocks.color[i].color = true
         that.player.unlocks.color[i].upgrade = true
       }
     }
+  }
+  if (that.player.color[2].amount.gt(10000)){
+    that.player.unlocks.colorScaling = true
   }
 
   that.player.stats.playTime += s
