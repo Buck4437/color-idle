@@ -86,6 +86,7 @@ export default {
 }
 
 .tooltip {
+  opacity: 0;
   visibility: hidden;
   border: 2px solid var(--border-color);
   background-color: var(--background-color);
@@ -94,6 +95,8 @@ export default {
   border-radius: 6px;
   padding: 10px 10px;
   width: 250px;
+
+  transition-duration: 0.3s;
 
   /* Position the tooltip */
   position: absolute;
@@ -114,6 +117,7 @@ export default {
 }
 
 .nodes:hover .tooltip {
+  opacity: 100;
   visibility: visible;
 }
 </style>
