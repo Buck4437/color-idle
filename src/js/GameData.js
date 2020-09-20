@@ -424,7 +424,7 @@ var gameData = {
       id: "31",
       pos: [0.1, 400],
       name: "Br -> GP",
-      cost: new Decimal(2),
+      cost: new Decimal(3),
       parents: ["21"],
       desc(player){
         let cost = `<br><br> Cost: ${this.cost} Light`
@@ -501,7 +501,7 @@ var gameData = {
       id: "35",
       pos: [0.9, 400],
       name: "Br -> GM",
-      cost: new Decimal(2),
+      cost: new Decimal(3),
       parents: ["25"],
       desc(player){
         let cost = `<br><br>Cost: ${this.cost} Light`
@@ -521,7 +521,7 @@ var gameData = {
       id: "41",
       pos: [0.1, 550],
       name: "Br -> BP",
-      cost: new Decimal(4),
+      cost: new Decimal(10),
       parents: ["31"],
       desc(player){
         let cost = `<br><br> Cost: ${this.cost} Light`
@@ -617,7 +617,7 @@ var gameData = {
       id: "46",
       pos: [0.9, 550],
       name: "Br -> BM",
-      cost: new Decimal(4),
+      cost: new Decimal(10),
       parents: ["35"],
       desc(player){
         let cost = `<br><br>Cost: ${this.cost} Light`
@@ -637,7 +637,7 @@ var gameData = {
       id: "51",
       pos: [0.1, 700],
       name: "Fastest",
-      cost: new Decimal(10),
+      cost: new Decimal(20),
       parents: ["41"],
       desc(player){
         let cost = `<br><br>Cost: ${this.cost} Light`
@@ -679,7 +679,7 @@ var gameData = {
       id: "53",
       pos: [0.9, 700],
       name: "Unspent",
-      cost: new Decimal(10),
+      cost: new Decimal(20),
       parents: ["46"],
       desc(player){
         let cost = `<br><br>Cost: ${this.cost} Light`
@@ -688,8 +688,9 @@ var gameData = {
                 Currently: x${format.num(this.effect(player), 2)}
                 ${cost}`
       },
-      effect(){
-        return new Decimal(1)
+      effect(player){
+        let multi = Decimal.log10(player.brightness.light + 1)/1.5 + 1
+        return multi
       },
       state(player){
         return brightnessUpgState(this, player)
