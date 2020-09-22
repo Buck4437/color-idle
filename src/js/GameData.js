@@ -332,12 +332,12 @@ var gameData = {
       desc(player){
         let cost = `<br><br> Cost: ${this.cost} Light`
         if (player.brightness.brightnessUpg[this.id] >= 1) cost = ""
-        return `Produce Red faster based on time spent in current brighten<br><br>
+        return `Produce Red faster based on number of times brightened<br><br>
                 Currently: x${format.num(this.effect(player), 2)}
                 ${cost}`
       },
       effect(player){
-        return Math.log10(player.stats.brightness.resets + 1) + 1
+        return Math.log10(player.stats.brightness.resets + 1)/1.5 + 1
       },
       state(player){
         return brightnessUpgState(this, player)
@@ -414,7 +414,7 @@ var gameData = {
                 ${cost}`
       },
       effect(player){
-        return Math.log10(player.stats.brightness.resets + 1) + 1
+        return Math.log10(player.stats.brightness.resets + 1)/1.5 + 1
       },
       state(player){
         return brightnessUpgState(this, player)
@@ -429,12 +429,12 @@ var gameData = {
       desc(player){
         let cost = `<br><br> Cost: ${this.cost} Light`
         if (player.brightness.brightnessUpg[this.id] >= 1) cost = ""
-        return `Produce Green faster based on time spent in current brighten<br><br>
+        return `Produce Green faster based on number of times brightened<br><br>
                 Currently: x${format.num(this.effect(player), 2)}
                 ${cost}`
       },
       effect(player){
-        return Math.log10(player.stats.brightness.resets + 1) + 1
+        return Math.log10(player.stats.brightness.resets + 1)/1.5 + 1
       },
       state(player){
         return brightnessUpgState(this, player)
@@ -511,7 +511,7 @@ var gameData = {
                 ${cost}`
       },
       effect(player){
-        return Math.log10(player.stats.brightness.resets + 1) + 1
+        return Math.log10(player.stats.brightness.resets + 1)/1.5 + 1
       },
       state(player){
         return brightnessUpgState(this, player)
@@ -526,12 +526,12 @@ var gameData = {
       desc(player){
         let cost = `<br><br> Cost: ${this.cost} Light`
         if (player.brightness.brightnessUpg[this.id] >= 1) cost = ""
-        return `Produce Blue faster based on time spent in current brighten<br><br>
+        return `Produce Blue faster based on number of times brightened<br><br>
                 Currently: x${format.num(this.effect(player), 2)}
                 ${cost}`
       },
       effect(player){
-        return Math.log10(player.stats.brightness.resets + 1) + 1
+        return Math.log10(player.stats.brightness.resets + 1)/1.5 + 1
       },
       state(player){
         return brightnessUpgState(this, player)
@@ -627,7 +627,7 @@ var gameData = {
                 ${cost}`
       },
       effect(player){
-        return Math.log10(player.stats.brightness.resets + 1) + 1
+        return Math.log10(player.stats.brightness.resets + 1)/1.5 + 1
       },
       state(player){
         return brightnessUpgState(this, player)
@@ -649,7 +649,7 @@ var gameData = {
       effect(player){
         let time = player.stats.brightness.fastestTime
 
-        let multi = Math.min(Math.max(1, (15/time)**0.5), 10)
+        let multi = Math.min(Math.max(1, (30/time)**0.5), 10)
         return new Decimal(multi)
       },
       state(player){
@@ -689,7 +689,7 @@ var gameData = {
                 ${cost}`
       },
       effect(player){
-        let multi = Decimal.log10(player.brightness.light + 1)/1.5 + 1
+        let multi = Decimal.log10(player.brightness.light + 1)/3 + 1
         return multi
       },
       state(player){
