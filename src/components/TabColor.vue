@@ -1,7 +1,7 @@
 <template lang="html">
   <div>
     <div>
-      <div v-if="player.unlocks.colorScaling"> Your excess amount of blue divides all your color production by x{{format.num(gameData.colorScaling.effect(player), 2)}} !<br><br></div>
+      <div v-if="player.unlocks.colorScaling"> Your excess amount of blue multiplies production time of all colors by x{{format.num(gameData.colorScaling.effect(player), 2)}} !<br><br></div>
       <color-red                                        class="red-producer" :width="progressWidth[0]" :canGenerate="canGenerate[0]" @generate="generate"/>
       <color-green v-if="player.unlocks.color[1].color" class="green-producer" :width="progressWidth[1]" :canGenerate="canGenerate[1]" @generate="generate"/>
       <color-blue  v-if="player.unlocks.color[2].color" class="blue-producer" :width="progressWidth[2]" :canGenerate="canGenerate[2]" @generate="generate"/>

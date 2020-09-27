@@ -24,7 +24,6 @@ var gameData = {
       },
       multi(player){
         let multi = new Decimal(1)
-                    .div(gameData.colorScaling.effect(player)) //scaling
                     .times(gameData.colorUpg["12"].effect(player))
                     .times(gameData.color[1].effect(player))
                     .times(gameData.color[2].effect(player))
@@ -39,6 +38,7 @@ var gameData = {
       },
       speed(player){
         let speed = new Decimal(1) //increase = faster, decrease = slower
+                    .div(gameData.colorScaling.effect(player)) //scaling
                     .times(gameData.colorUpg["11"].effect(player))
                     .times(player.color[0].auto ? gameData.colorUpg["13"].effect(player) : 1)
                     .times(player.brightness.brightnessUpg["11"] ? gameData.brightnessUpgNode("11").effect(player) : 1)
@@ -57,7 +57,6 @@ var gameData = {
       },
       multi(player){
         let multi = new Decimal(1)
-                    .div(gameData.colorScaling.effect(player)) //scaling
                     .times(gameData.color[2].effect(player))
                     .times(gameData.colorUpg["22"].effect(player))
                     .times(player.brightness.brightnessUpg["12"] ? gameData.brightnessUpgNode("12").effect(player) : 1)
@@ -71,6 +70,7 @@ var gameData = {
       },
       speed(player){
         let speed = new Decimal(1) //increase = faster, decrease = slower
+                    .div(gameData.colorScaling.effect(player)) //scaling
                     .times(gameData.colorUpg["21"].effect(player))
                     .times(player.color[1].auto ? gameData.colorUpg["23"].effect(player) : 1)
                     .times(player.brightness.brightnessUpg["11"] ? gameData.brightnessUpgNode("11").effect(player) : 1)
@@ -95,7 +95,6 @@ var gameData = {
       },
       multi(player){
         let multi = new Decimal(1)
-                    .div(gameData.colorScaling.effect(player)) //scaling
                     .times(gameData.colorUpg["32"].effect(player))
                     .times(player.brightness.brightnessUpg["12"] ? gameData.brightnessUpgNode("12").effect(player) : 1)
                     .times(player.brightness.brightnessUpg["46"] ? gameData.brightnessUpgNode("46").effect(player) : 1)
@@ -108,6 +107,7 @@ var gameData = {
       },
       speed(player){
         let speed = new Decimal(1) //increase = faster, decrease = slower
+                    .div(gameData.colorScaling.effect(player)) //scaling
                     .times(gameData.colorUpg["31"].effect(player))
                     .times(player.color[2].auto ? gameData.colorUpg["34"].effect(player) : 1)
                     .times(player.brightness.brightnessUpg["11"] ? gameData.brightnessUpgNode("11").effect(player) : 1)
