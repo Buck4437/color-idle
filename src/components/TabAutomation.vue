@@ -1,8 +1,6 @@
 <template lang="html">
   <div>
-    <auto-module v-if="player.colorUpg['13'] >= 1" :id="'red'"   :name="'Red Generator'"     :auto="player.color[0].auto" @toggle="toggle"></auto-module>
-    <auto-module v-if="player.colorUpg['23'] >= 1" :id="'green'" :name="'Green Generator'"   :auto="player.color[1].auto" @toggle="toggle"></auto-module>
-    <auto-module v-if="player.colorUpg['34'] >= 1" :id="'blue'"  :name="'Blue Generator'"    :auto="player.color[2].auto" @toggle="toggle"></auto-module>
+    <auto-module :id="'brightness'" :name="'Auto brighten'" :auto="player.brightness.auto.isToggled" @toggle="toggle" @toggleMode="toggleMode"></auto-module>
   </div>
 </template>
 
@@ -16,14 +14,16 @@ export default {
   methods:{
     toggle(id){
       switch (id){
-        case 'red':
-          this.player.color[0].auto = !this.player.color[0].auto
+        case 'brightness':
+          this.player.brightness.auto.isToggled = !this.player.brightness.auto.isToggled
           break
-        case 'green':
-          this.player.color[1].auto = !this.player.color[1].auto
-          break
-        case 'blue':
-          this.player.color[2].auto = !this.player.color[2].auto
+      }
+    },
+    toggleMode(id){
+      switch (id){
+        case 'brightness':
+          this.player.brightness.auto.mode ++
+          if (this.player.brightness.auto.mode > 2) this.player.brightness.auto.mode = 0
           break
       }
     }

@@ -1,6 +1,6 @@
 <template lang="html">
   <div>
-    <navigation-bar :buttons="buttons" @select-button="selectTab"/>
+    <navigation-bar :buttons="buttons" @select-button="selectTab" style="display: none;"/>
     <subtab-upgrades v-show="selectedTab == 'upgrades'"/>
   </div>
 </template>

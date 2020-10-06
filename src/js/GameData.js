@@ -695,6 +695,22 @@ var gameData = {
       state(player){
         return brightnessUpgState(this, player)
       }
+    },
+    {
+      id: "61",
+      pos: [0.5, 850],
+      name: "???",
+      cost: new Decimal("1e9999"),
+      parents: ["51", "52", "53"],
+      desc(){
+        return `Coming soon!`
+      },
+      effect(){
+        return new Decimal(1)
+      },
+      state(){
+        return "locked"
+      }
     }
   ]
 }

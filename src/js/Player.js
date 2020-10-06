@@ -39,6 +39,11 @@ export default function(){
     },
     brightness: {
       light: new Decimal(0),
+      auto:{
+        isToggled: false,
+        mode: 0,
+        value: "0"
+      },
       brightnessUpg: {
         11: 0,
         12: 0,
